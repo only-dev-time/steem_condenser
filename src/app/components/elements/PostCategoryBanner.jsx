@@ -22,7 +22,7 @@ class PostCategoryBanner extends React.Component {
 
     render() {
         const { username, community, disabledCommunity } = this.props;
-        const url = community ? '/trending/' + community.get('name') : null;
+        const url = community ? '/created/' + community.get('name') : null;
         const label = community ? (
             <Link to={url}>{community.get('title')}</Link>
         ) : (

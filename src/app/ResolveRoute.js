@@ -30,8 +30,9 @@ export const routeRegex = {
 };
 
 export default function resolveRoute(path) {
+    console.log('DEV: ' + path);
     // index
-    if (path === '/') return { page: 'PostsIndex', params: ['trending'] };
+    if (path === '/') return { page: 'PostsIndex', params: ['created'] };
 
     // static
     if (path === '/welcome') return { page: 'Welcome' };
