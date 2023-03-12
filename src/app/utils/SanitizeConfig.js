@@ -98,7 +98,7 @@ export default ({
 
         // class attribute is strictly whitelisted (below)
         // and title is only set in the case of a phishing warning
-        div: ['class', 'title'],
+        div: ['class', 'title', 'id'],
 
         // style is subject to attack, filtering more below
         td: ['style'],
@@ -183,6 +183,10 @@ export default ({
                 attribs.title === getPhishingWarningMessage()
             )
                 attys.title = attribs.title;
+            // allow intern anchor with attribute 'id' - only if the 'id' begins with 'anchor'
+            if (attribs.id && attribs.id.indexOf('anchor') == 0) {
+                attys.id = attribs.id;
+            }
             return {
                 tagName,
                 attribs: attys,
