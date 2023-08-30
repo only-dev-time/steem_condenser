@@ -4,7 +4,7 @@
   "helmet": {
     "directives": {
       "childSrc": "'self' 3speak.online emb.d.tube player.twitch.tv www.youtube.com staticxx.facebook.com w.soundcloud.com player.vimeo.com",
-      "connectSrc": "https://steemitimages.com securepubads.g.doubleclick.net 'self' steemit.com https://api.steemit.com www.googletagmanager.com www.google-analytics.com pagead2.googlesyndication.com googleads.g.doubleclick.net",
+      "connectSrc": "https://steemitimages.com securepubads.g.doubleclick.net 'self' steemit.com https://api.steemit.com www.googletagmanager.com www.google-analytics.com pagead2.googlesyndication.com googleads.g.doubleclick.net moecki.online steemit.moecki.online https://api.moecki.online",
       "defaultSrc": "tpc.googlesyndication.com 'self' img.3speakcontent.online emb.d.tube www.youtube.com staticxx.facebook.com player.vimeo.com *.streamrail.com",
       "fontSrc": "data: fonts.gstatic.com steemitdev.com steemit.com steemitwallet.com",
       "frameAncestors": "'none'",
@@ -33,10 +33,10 @@
   "server_session_secret": "exiKdyF+IwRIXJDmtGIl4vWUz4i3eVSISpfZoeYc0s4=",
   "session_cookie_key": "stm-dev",
   "session_key": "steemses",
-  "site_domain": "steemitdev.com",
+  "site_domain": "moecki.online",
   "upload_image": "https://steemitimages.com",
-  "steemd_connection_client": "https://api.steemitdev.com",
-  "steemd_connection_server": "https://api.steemitdev.com",
+  "steemd_connection_client": "https://api.moecki.online",
+  "steemd_connection_server": "https://api.moecki.online",
   "steemd_use_appbase": false,
   "chain_id": "0000000000000000000000000000000000000000000000000000000000000000",
   "address_prefix": "STM",
