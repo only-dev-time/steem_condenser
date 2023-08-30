@@ -24,6 +24,7 @@ import SidebarNewUsers from 'app/components/elements/SidebarNewUsers';
 import Topics from './Topics';
 import Icon from 'app/components/elements/Icon';
 import AdSwipe from 'app/components/elements/AdSwipe';
+import TronAd from 'app/components/elements/TronAd';
 import * as appActions from 'app/redux/AppReducer';
 import Announcement from './Announcement';
 
@@ -49,6 +50,7 @@ class Post extends React.Component {
         this.state = {
             showNegativeComments: false,
             timeOut: false,
+            showPostComments: true,
         };
         this.showSignUp = () => {
             serverApiRecordEvent('SignUp', 'Post Promo');
@@ -60,6 +62,21 @@ class Post extends React.Component {
         const { subscriptions, getSubscriptions, uname, dis } = this.props;
         this.props.setRouteTag(dis.get('url'));
         if (!subscriptions && uname) getSubscriptions(uname);
+        this.setState({
+            showPostComments: true,
+        });
+    }
+
+    componentDidMount() {
+        const _this = this;
+        setTimeout(() => {
+            if (_this.props.dis === undefined) {
+                _this.setState({
+                    timeOut: true,
+                    showPostComments: true,
+                });
+            }
+        }, 2000);
     }
 
     componentWillUpdate(nextProps) {
@@ -73,17 +90,6 @@ class Post extends React.Component {
         const { subscriptions, getSubscriptions, uname } = this.props;
         if (!subscriptions && uname && uname != prevProps.uname)
             getSubscriptions(uname);
-    }
-
-    componentDidMount() {
-        const _this = this;
-        setTimeout(() => {
-            if (_this.props.dis === undefined) {
-                _this.setState({
-                    timeOut: true,
-                });
-            }
-        }, 2000);
     }
 
     componentWillUnmount() {
@@ -107,6 +113,10 @@ class Post extends React.Component {
         this.setState({ showAnyway: true });
     };
 
+    showPostCommentClick = () => {
+        this.setState({ showPostComments: false });
+    };
+
     render() {
         const { showSignUp } = this;
         const {
@@ -122,16 +132,30 @@ class Post extends React.Component {
             trackingId,
             postLeftSideAdList,
             bottomAdList,
+            adSwipeConf,
+            tronAdsConf,
+            locale,
         } = this.props;
         const {
             showNegativeComments,
             commentHidden,
+            showPostComments,
             showAnyway,
             timeOut,
         } = this.state;
+
+        const adSwipeEnabled = adSwipeConf.getIn(['enabled']);
+        const tronAdsEnabled = tronAdsConf.getIn(['enabled']);
+        const tronAdSidebyPid = tronAdsConf.getIn(['sidebar_ad_pid']);
+        const tronAdPcPid = tronAdsConf.getIn(['content_pc_ad_pid']);
+        const tronAdMobilePid = tronAdsConf.getIn(['content_mobile_ad_pid']);
+        const tronAdsEnv = tronAdsConf.getIn(['env']);
+        const tronAdsMock = tronAdsConf.getIn(['is_mock']);
+
         if (dis === undefined && !timeOut) {
             return null;
         }
+
         if (isEmptyPost(dis) || timeOut)
             return (
                 <div className="NotFound float-center">
@@ -144,7 +168,8 @@ class Post extends React.Component {
                             Not to worry. You can head back to{' '}
                             <a style={{ fontWeight: 800 }} href="/">
                                 our homepage
-                            </a>, or check out some great posts.
+                            </a>
+                            , or check out some great posts.
                         </p>
                         <ul className="NotFound__menu">
                             <li>
@@ -173,7 +198,8 @@ class Post extends React.Component {
                                 <p onClick={this.showAnywayClick}>
                                     {tt(
                                         'promote_post_jsx.this_post_was_hidden_due_to_low_ratings'
-                                    )}.{' '}
+                                    )}
+                                    .{' '}
                                     <button
                                         style={{ marginBottom: 0 }}
                                         className="button hollow tiny float-right"
@@ -197,12 +223,20 @@ class Post extends React.Component {
 
         // Don't render too many comments on server-side
         const commentLimit = 100;
-        if (global.process !== undefined && replies.length > commentLimit) {
-            replies = replies.slice(0, commentLimit);
+        const commentDefault = 10;
+
+        // if (global.process !== undefined && replies.length > commentLimit) {
+        //     replies = replies.slice(0, commentLimit);
+        // }
+
+        if (replies.length > 0 && showPostComments) {
+            replies = replies.slice(0, commentDefault);
         }
+
         let commentCount = 0;
         const positiveComments = replies.map(reply => {
             commentCount++;
+
             const showAd =
                 commentCount % 5 === 0 &&
                 commentCount !== replies.length &&
@@ -238,7 +272,8 @@ class Post extends React.Component {
                         ? tt('post_jsx.now_showing_comments_with_low_ratings')
                         : tt(
                               'post_jsx.comments_were_hidden_due_to_low_ratings'
-                          )}.{' '}
+                          )}
+                    .{' '}
                     <button
                         className="button hollow tiny float-right"
                         onClick={e => this.toggleNegativeReplies(e)}
@@ -278,35 +313,80 @@ class Post extends React.Component {
                             subscriptions={subscriptions}
                             topics={topics}
                         />
-                        <div>
+                        {adSwipeEnabled && (
                             <AdSwipe
                                 adList={postLeftSideAdList}
                                 trackingId={trackingId}
                                 timer={5000}
                                 direction="horizontal"
                             />
-                        </div>
+                        )}
+                        {tronAdsEnabled && (
+                            <TronAd
+                                env={tronAdsEnv}
+                                trackingId={trackingId}
+                                wrapperName={'tron_ad_sideby'}
+                                pid={tronAdSidebyPid}
+                                isMock={tronAdsMock}
+                                lang={locale}
+                                adTag={'tron_ad_sideby'}
+                                ratioClass={'ratio-1-1'}
+                            />
+                        )}
                     </div>
                     <div className="post-main">
                         <div className="row">
                             <div className="column">{postBody}</div>
                         </div>
                         <div className="row">
-                            <div className="column">
-                                <div
-                                    style={{
-                                        margin: '0.5rem auto 0',
-                                        maxWidth: '54rem',
-                                    }}
-                                >
-                                    <AdSwipe
-                                        adList={bottomAdList}
-                                        trackingId={trackingId}
-                                        timer={5000}
-                                        direction="vertical"
-                                    />
+                            {adSwipeEnabled && (
+                                <div className="column">
+                                    <div
+                                        style={{
+                                            margin: '0.5rem auto 0',
+                                            maxWidth: '54rem',
+                                        }}
+                                    >
+                                        <AdSwipe
+                                            adList={bottomAdList}
+                                            trackingId={trackingId}
+                                            timer={5000}
+                                            direction="vertical"
+                                        />
+                                    </div>
                                 </div>
-                            </div>
+                            )}
+                            {tronAdsEnabled && (
+                                <div className="column">
+                                    <div
+                                        style={{
+                                            margin: '0.5rem auto 0',
+                                            maxWidth: '54rem',
+                                        }}
+                                    >
+                                        <TronAd
+                                            env={tronAdsEnv}
+                                            trackingId={trackingId}
+                                            wrapperName={'tron_ad_pc'}
+                                            pid={tronAdPcPid}
+                                            isMock={tronAdsMock}
+                                            lang={locale}
+                                            adTag={'tron_ad_pc'}
+                                            ratioClass={'ratio-10-1'}
+                                        />
+                                        <TronAd
+                                            env={tronAdsEnv}
+                                            trackingId={trackingId}
+                                            wrapperName={'tron_ad_mobile'}
+                                            pid={tronAdMobilePid}
+                                            isMock={tronAdsMock}
+                                            lang={locale}
+                                            adTag={'tron_ad_mobile'}
+                                            ratioClass={'ratio-375-80'}
+                                        />
+                                    </div>
+                                </div>
+                            )}
                         </div>
                         {false &&
                             !isLoggedIn() && (
@@ -315,7 +395,8 @@ class Post extends React.Component {
                                         <div className="Post__promo">
                                             {tt(
                                                 'g.next_7_strings_single_block.authors_get_paid_when_people_like_you_upvote_their_post'
-                                            )}.
+                                            )}
+                                            .
                                             <br />
                                             {tt(
                                                 'g.next_7_strings_single_block.if_you_enjoyed_what_you_read_earn_amount'
@@ -346,7 +427,7 @@ class Post extends React.Component {
                         <div id="#comments" className="Post_comments row hfeed">
                             <div className="column large-12">
                                 <div className="Post_comments__content">
-                                    {positiveComments.length ? (
+                                    {positiveComments.length > 0 ? (
                                         <div className="Post__comments_sort_order float-right">
                                             {tt('post_jsx.sort_order')}: &nbsp;
                                             <DropdownMenu
@@ -357,7 +438,25 @@ class Post extends React.Component {
                                             />
                                         </div>
                                     ) : null}
-                                    {positiveComments}
+                                    {positiveComments.length > 0
+                                        ? positiveComments
+                                        : null}
+                                    {positiveComments.length > 0 &&
+                                    positiveComments.length ===
+                                        commentDefault &&
+                                    commentDefault < dis.get('children') &&
+                                    showPostComments ? (
+                                        <div className="hentry Comment root Post_comments__count">
+                                            <button
+                                                className="comment-button"
+                                                onClick={
+                                                    this.showPostCommentClick
+                                                }
+                                            >
+                                                LOAD MORE COMMENTS
+                                            </button>
+                                        </div>
+                                    ) : null}
                                     {negativeGroup}
                                 </div>
                             </div>
@@ -399,6 +498,9 @@ export default connect(
         const post = username + '/' + slug;
         const content = state.global.get('content');
         const dis = content.get(post);
+        const adSwipeConf = state.app.getIn(['adSwipe']);
+        const tronAdsConf = state.app.getIn(['tronAds']);
+        const locale = state.app.getIn(['user_preferences', 'locale']);
         const trackingId = state.app.getIn(['trackingId'], null);
         const steemMarketData = state.app.get('steemMarket');
         const uname =
@@ -415,6 +517,9 @@ export default connect(
             dis,
             sortOrder: currLocation.query.sort || 'trending',
             gptEnabled: false, //state.app.getIn(['googleAds', 'gptEnabled']),
+            adSwipeConf,
+            tronAdsConf,
+            locale,
             trackingId,
             steemMarketData,
             isBrowser: process.env.BROWSER,

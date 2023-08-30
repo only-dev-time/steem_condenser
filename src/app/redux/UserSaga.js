@@ -26,6 +26,7 @@ import {
     hasCompatibleKeychain,
     isLoggedInWithKeychain,
 } from 'app/utils/SteemKeychain';
+import { changeRPCNodeToDefault } from '../utils/RPCNode';
 import { packLoginData, extractLoginData } from 'app/utils/UserUtil';
 import { browserHistory } from 'react-router';
 import {
@@ -79,17 +80,24 @@ function effectiveVests(account) {
 
 function* shouldShowLoginWarning({ username, password }) {
     // If it's a master key, show the warning.
-    if (!auth.isWif(password)) {
-        const account = (yield api.getAccountsAsync([username]))[0];
-        if (!account) {
-            console.error('shouldShowLoginWarning - account not found');
-            return false;
+
+    try {
+        if (!auth.isWif(password)) {
+            const account = (yield api.getAccountsAsync([username]))[0];
+            if (!account) {
+                console.error('shouldShowLoginWarning - account not found');
+                return false;
+            }
+            const pubKey = PrivateKey.fromSeed(username + 'posting' + password)
+                .toPublicKey()
+                .toString();
+            const postingPubKeys = account.posting.key_auths[0];
+            return postingPubKeys.includes(pubKey);
         }
-        const pubKey = PrivateKey.fromSeed(username + 'posting' + password)
-            .toPublicKey()
-            .toString();
-        const postingPubKeys = account.posting.key_auths[0];
-        return postingPubKeys.includes(pubKey);
+    } catch (err) {
+        console.error('~~ Saga shouldShowLoginWarning error ~~>');
+
+        changeRPCNodeToDefault();
     }
 
     // For any other case, don't show the warning.
@@ -951,6 +959,7 @@ function* updateTronAddr() {
         username,
         auth_type: privateKeyType === 'active_private' ? 'active' : 'posting',
         tron_addr: tronPubKey,
+        from: 'condenser',
     };
     const result = yield updateTronUser(
         data,
