@@ -40,7 +40,7 @@ const SidebarLinks = ({ username, topics }) => (
                         <li key={item[0]} className="c-sidebar__list-item">
                             <Link
                                 className="c-sidebar__link"
-                                to={`/trending/${item[0]}`}
+                                to={`/created/${item[0]}`}
                             >
                                 {item[1]}
                             </Link>

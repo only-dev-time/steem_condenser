@@ -277,7 +277,7 @@ module.exports = {
                 : route.category ? route.category.toLowerCase() : null;
             const order = account_name
                 ? route.category
-                : route.order || 'trending';
+                : route.order || 'created';
 
             const hive = ifHive(category);
             const community = state.global.getIn(['community', hive], null);

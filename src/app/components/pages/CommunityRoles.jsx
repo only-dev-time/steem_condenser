@@ -204,7 +204,7 @@ class CommunityRoles extends React.Component {
             body = (
                 <div>
                     <h1 className="articles__h1">
-                        <Link to={`/trending/${community}`}>
+                        <Link to={`/created/${community}`}>
                             {commName || community}
                         </Link>
                     </h1>

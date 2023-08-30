@@ -67,7 +67,7 @@ export default class TagsIndex extends React.Component {
             })
             .map(tag => {
                 const name = tag.get('name');
-                const link = `/trending/${name}`;
+                const link = `/created/${name}`;
                 return (
                     <tr key={name}>
                         <td>

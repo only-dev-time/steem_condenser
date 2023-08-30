@@ -143,8 +143,8 @@ function parsePath(url) {
     if (url.length > 0 && url[url.length - 1] == '/')
         url = url.substring(0, url.length - 1);
 
-    // blank URL defaults to `trending`
-    if (url === '') url = 'trending';
+    // blank URL defaults to `created`
+    if (url === '') url = 'created';
 
     const part = url.split('/');
     const parts = part.length;

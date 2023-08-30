@@ -10,7 +10,7 @@ class TagList extends Component {
 
         const link = tag => {
             if (tag == category) return null;
-            return <Link to={`/trending/${tag}`} key={tag}>{` #${tag} `}</Link>;
+            return <Link to={`/created/${tag}`} key={tag}>{` #${tag} `}</Link>;
         };
 
         return (
