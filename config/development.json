@@ -1,74 +1,111 @@
 {
-  "facebook_app_id": false,
-  "google_analytics_id": false,
-  "helmet": {
-    "directives": {
-      "childSrc": "'self' 3speak.online emb.d.tube player.twitch.tv www.youtube.com staticxx.facebook.com w.soundcloud.com player.vimeo.com",
-      "connectSrc": "https://steemitimages.com securepubads.g.doubleclick.net 'self' steemit.com https://api.steemit.com www.googletagmanager.com www.google-analytics.com pagead2.googlesyndication.com googleads.g.doubleclick.net moecki.online steemit.moecki.online https://api.moecki.online",
-      "defaultSrc": "tpc.googlesyndication.com 'self' img.3speakcontent.online emb.d.tube www.youtube.com staticxx.facebook.com player.vimeo.com *.streamrail.com",
-      "fontSrc": "data: fonts.gstatic.com steemitdev.com steemit.com steemitwallet.com",
-      "frameAncestors": "'none'",
-      "frameSrc": "'self' googleads.g.doubleclick.net https:",
-      "imgSrc": "* data:",
-      "objectSrc": "'none'",
-      "pluginTypes": "application/pdf",
-      "scriptSrc": "'unsafe-inline' 'unsafe-eval' data: https: 'self' www.google-analytics.com connect.facebook.net cdn.catchjs.com",
-      "styleSrc": "'self' 'unsafe-inline' fonts.googleapis.com",
-      "reportUri": "/api/v1/csp_violation"
+    "facebook_app_id": false,
+    "google_analytics_id": false,
+    "helmet": {
+        "directives": {
+            "childSrc": "'self' 3speak.online emb.d.tube player.twitch.tv www.youtube.com staticxx.facebook.com w.soundcloud.com player.vimeo.com",
+            "connectSrc": "https://steemitimages.com securepubads.g.doubleclick.net 'self' steemit.com https://api.steemit.com www.googletagmanager.com www.google-analytics.com pagead2.googlesyndication.com googleads.g.doubleclick.net",
+            "defaultSrc": "tpc.googlesyndication.com 'self' img.3speakcontent.online emb.d.tube www.youtube.com staticxx.facebook.com player.vimeo.com *.streamrail.com",
+            "fontSrc": "data: fonts.gstatic.com steemitdev.com steemit.com steemitwallet.com",
+            "frameAncestors": "'none'",
+            "frameSrc": "'self' googleads.g.doubleclick.net https:",
+            "imgSrc": "* data:",
+            "objectSrc": "'none'",
+            "pluginTypes": "application/pdf",
+            "scriptSrc": "'unsafe-inline' 'unsafe-eval' data: https: 'self' www.google-analytics.com connect.facebook.net cdn.catchjs.com",
+            "styleSrc": "'self' 'unsafe-inline' fonts.googleapis.com",
+            "reportUri": "/api/v1/csp_violation"
+        },
+        "reportOnly": false,
+        "setAllHeaders": true
     },
-    "reportOnly": false,
-    "setAllHeaders": true
-  },
-  "img_proxy_prefix": "https://steemitimages.com/",
-  "ipfs_prefix": false,
-  "mixpanel": false,
-  "notify": {
-    "gcm_key": "google secret key"
-  },
-  "read_only_mode": false,
-  "recaptcha": {
-    "secret_key": false,
-    "site_key": false
-  },
-  "server_session_secret": "exiKdyF+IwRIXJDmtGIl4vWUz4i3eVSISpfZoeYc0s4=",
-  "session_cookie_key": "stm-dev",
-  "session_key": "steemses",
-  "site_domain": "moecki.online",
-  "upload_image": "https://steemitimages.com",
-  "steemd_connection_client": "https://api.moecki.online",
-  "steemd_connection_server": "https://api.moecki.online",
-  "steemd_use_appbase": false,
-  "chain_id": "0000000000000000000000000000000000000000000000000000000000000000",
-  "address_prefix": "STM",
-  "conveyor_posting_wif": false,
-  "conveyor_username": false,
-  "special_posts_url": false,
-  "wallet_url": "https://steemitwallet.com",
-  "gpt_banned_tags": ["nsfw", "tante"],
-  "google_ad_enabled": null,
-  "google_ad_test": null,
-  "google_ad_client": null,
-  "google_ad_slots": {
-    "market_1": {
-      "slot_id": "2777377820"
+    "img_proxy_prefix": "https://steemitimages.com/",
+    "ipfs_prefix": false,
+    "mixpanel": false,
+    "notify": {
+        "gcm_key": "google secret key"
     },
-    "in_feed_1": {
-      "slot_id": "9514544128",
-      "layout_key": "-fb+5w+4e-db+86",
-      "every": 15
-    }
-  },
-  "video_ads_enabled": null,
-  "gpt_enabled": null,
-  "gpt_basic_slots": {
-    "bottom-of-post": {
-      "path": "/21784675435/steemit_bottom-of-post",
-      "dimensions": [[728, 90], [970, 90]]
+    "read_only_mode": false,
+    "recaptcha": {
+        "secret_key": false,
+        "site_key": false
     },
-    "bottom-of-post-mobile": {
-      "path": "/21784675435/steemit_bottom-of-post/steemit_bottom-of-post_mobile",
-      "dimensions": [[220, 90]]
+    "server_session_secret": "exiKdyF+IwRIXJDmtGIl4vWUz4i3eVSISpfZoeYc0s4=",
+    "session_cookie_key": "stm-dev",
+    "session_key": "steemses",
+    "site_domain": "steemitdev.com",
+    "upload_image": "https://steemitimages.com",
+    "steemd_connection_client": "https://api.steemitdev.com",
+    "steemd_connection_server": "https://api.steemitdev.com",
+    "rpc_list": [
+        "https://api.steemit.com",
+        "https://api.steemitdev.com",
+        "https://api.steem.fans",
+        "https://steem.61bts.com",
+        "https://api.steemyy.com",
+        "https://cn.steems.top",
+        "https://api.steems.top",
+        "https://api.wherein.io",
+        "https://justyy.azurewebsites.net/api/steem",
+        "https://api.justyy.com",
+        "https://steemapi.boylikegirl.club",
+        "https://api.steem.buzz",
+        "https://api.futureshock.world",
+        "https://api.worldofxpilar.com"
+        // "https://api.pennsif.net",
+        // "https://api.upvu.org",
+        // "https://api.supporter.dev",
+        // "https://steemyy.com/node/",
+        // "https://api.dlike.io",
+        // "https://api.steem-fanbase.com",
+        // "https://fullsteem.3dkrender.com",
+        // "https://api.steemzzang.com",
+        // "https://api.symbionts.io",
+        // "https://steemd.steemworld.org",
+        // "https://api.steememory.com",
+        // "https://api.cotina.org",
+        // "https://steemapi.3dkrender.com",
+        // "https://api.protoss20.com",
+        // "https://rpc.amarbangla.net",
+        // "https://steem.senior.workers.dev",
+        // "https://api.campingclub.me",
+        // "https://api.blokfield.io"
+    ],
+    "steemd_use_appbase": false,
+    "chain_id": "0000000000000000000000000000000000000000000000000000000000000000",
+    "address_prefix": "STM",
+    "conveyor_posting_wif": false,
+    "conveyor_username": false,
+    "special_posts_url": false,
+    "wallet_url": "https://steemitwallet.com",
+    "gpt_banned_tags": ["nsfw", "tante"],
+    "google_ad_enabled": null,
+    "google_ad_test": null,
+    "google_ad_client": null,
+    "google_ad_slots": {
+        "market_1": {
+            "slot_id": "2777377820"
+        },
+        "in_feed_1": {
+            "slot_id": "9514544128",
+            "layout_key": "-fb+5w+4e-db+86",
+            "every": 15
+        }
     },
+    "video_ads_enabled": null,
+    "gpt_enabled": null,
+    "gpt_basic_slots": {
+        "bottom-of-post": {
+            "path": "/21784675435/steemit_bottom-of-post",
+            "dimensions": [
+                [728, 90],
+                [970, 90]
+            ]
+        },
+        "bottom-of-post-mobile": {
+            "path": "/21784675435/steemit_bottom-of-post/steemit_bottom-of-post_mobile",
+            "dimensions": [[220, 90]]
+        },
 
         "left-navigation": {
             "path": "/21784675435/steemit_left-navigation",
@@ -290,11 +327,5 @@
     "steem_elastic_search_endpoint": "https://search-hive-dev-new-sbsqvjz2ct6onsxabnsde3qkgi.us-east-1.es.amazonaws.com",
     "wallet_api_host": "https://wallet.steemitdev.com",
     "tron_create_node": "https://api.shasta.trongrid.io",
-    "activity_tag": "",
-    "adswipe_enabled": false,
-    "tronads_enabled": false,
-    "tronads_env": 1,
-    "tronads_sidebar_ad_pid": "",
-    "tronads_content_pc_ad_pid": "",
-    "tronads_content_mobile_ad_pid": ""
+    "activity_tag": ""
 }
