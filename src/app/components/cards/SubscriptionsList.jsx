@@ -47,7 +47,7 @@ class SubscriptionsList extends React.Component {
             const [hive, name, role, title] = tuple;
             return (
                 <li key={hive}>
-                    <Link to={'/trending/' + hive}>{name || hive}</Link>
+                    <Link to={'/created/' + hive}>{name || hive}</Link>
                     <span className="user_role">{role}</span>
                     {title && <span className="affiliation">{title}</span>}
                 </li>

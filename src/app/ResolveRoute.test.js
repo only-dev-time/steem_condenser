@@ -30,7 +30,7 @@ describe('routeRegex', () => {
 
 describe('resolveRoute', () => {
     const test_cases = [
-        ['/', { page: 'PostsIndex', params: ['trending'] }],
+        ['/', { page: 'PostsIndex', params: ['created'] }],
         ['/trending', { page: 'PostsIndex', params: ['trending', undefined] }],
         ['/trending/cat', { page: 'PostsIndex', params: ['trending', 'cat'] }],
         ['/trending/Dog', { page: 'PostsIndex', params: ['trending', 'Dog'] }],

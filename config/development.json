@@ -32,10 +32,10 @@
     "server_session_secret": "exiKdyF+IwRIXJDmtGIl4vWUz4i3eVSISpfZoeYc0s4=",
     "session_cookie_key": "stm-dev",
     "session_key": "steemses",
-    "site_domain": "steemit.com",
+    "site_domain": "steemitdev.com",
     "upload_image": "https://steemitimages.com",
-    "steemd_connection_client": "https://api.steemit.com",
-    "steemd_connection_server": "https://api.steemit.com",
+    "steemd_connection_client": "https://api.steemitdev.com",
+    "steemd_connection_server": "https://api.steemitdev.com",
     "rpc_list": [
         "https://api.steemit.com",
         "https://api.steemitdev.com",

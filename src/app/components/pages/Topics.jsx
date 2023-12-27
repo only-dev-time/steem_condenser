@@ -36,7 +36,7 @@ class Topics extends Component {
                         label: 'My friends' || `tt('g.my_feed')`,
                     };
                 if (tag === 'my')
-                    return { value: `/trending/my`, label: 'My communities' };
+                    return { value: `/created/my`, label: 'My communities' };
                 if (tag == 'explore')
                     return {
                         value: `/communities`,
@@ -44,7 +44,7 @@ class Topics extends Component {
                     };
                 if (tag)
                     return {
-                        value: `/trending/${tag}`,
+                        value: `/created/${tag}`,
                         label: label || '#' + tag,
                     };
                 return { value: `/`, label: tt('g.all_tags') };
@@ -126,7 +126,7 @@ class Topics extends Component {
                 {username && (
                     <li>{link(`/@${username}/feed`, 'My friends')}</li>
                 )}
-                {username && <li>{link(`/trending/my`, 'My communities')}</li>}
+                {username && <li>{link(`/created/my`, 'My communities')}</li>}
                 {(subscriptions || topics).size > 0 && <li>{commsHead}</li>}
                 {username &&
                     subscriptions &&
@@ -134,7 +134,7 @@ class Topics extends Component {
                         .toJS()
                         .map(cat => (
                             <li key={cat[0]}>
-                                {link(`/trending/${cat[0]}`, cat[1], '')}
+                                {link(`/created/${cat[0]}`, cat[1], '')}
                             </li>
                         ))}
                 {(!username || !subscriptions) &&
@@ -142,7 +142,7 @@ class Topics extends Component {
                         .toJS()
                         .map(cat => (
                             <li key={cat[0]}>
-                                {link(`/trending/${cat[0]}`, cat[1], '')}
+                                {link(`/created/${cat[0]}`, cat[1], '')}
                             </li>
                         ))}
                 <li>

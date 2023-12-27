@@ -13,7 +13,8 @@ RUN npm install -g yarn
 WORKDIR /var/app
 RUN mkdir -p /var/app
 ADD package.json yarn.lock /var/app/
-RUN yarn install --non-interactive --frozen-lockfile
+RUN chmod +x /usr/local/lib/node_modules/yarn/bin/yarn.js && \
+    yarn install --non-interactive --frozen-lockfile
 
 COPY . /var/app
 
@@ -32,8 +33,9 @@ ENV NODE_ENV production
 
 EXPOSE 8080
 
-CMD [ "yarn", "run", "production" ]
+# uncomment the lines below to run it in production mode
+# CMD [ "yarn", "run", "production" ]
 
 # uncomment the lines below to run it in development mode
-# ENV NODE_ENV development
-# CMD [ "yarn", "run", "start" ]
+ENV NODE_ENV development
+CMD [ "yarn", "run", "start" ]

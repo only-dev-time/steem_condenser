@@ -100,7 +100,7 @@ export default class CommunitiesIndex extends React.Component {
             return (
                 <tr key={comm.name}>
                     <th>
-                        <Link className="title" to={`/trending/${comm.name}`}>
+                        <Link className="title" to={`/created/${comm.name}`}>
                             {comm.title}
                         </Link>
                         {role(comm)}

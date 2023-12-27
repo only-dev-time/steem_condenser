@@ -7,18 +7,35 @@ export default function ServerHTML({
     locale,
     title,
     meta,
-    shouldSeeAds,
-    adClient,
-    gptEnabled,
-    gptBannedTags,
-    gptBidding,
-    shouldSeeCookieConsent,
-    cookieConsentApiKey,
+    google_analytics_id,
+    csp_nonce,
 }) {
     let page_title = title;
     return (
         <html lang="en">
             <head>
+                {google_analytics_id && (
+                    <script
+                        nonce={csp_nonce}
+                        async
+                        src={`https://www.googletagmanager.com/gtag/js?id=${
+                            google_analytics_id
+                        }`}
+                    />
+                )}
+                {google_analytics_id && (
+                    <script
+                        nonce={csp_nonce}
+                        dangerouslySetInnerHTML={{
+                            __html: `
+                                window.dataLayer = window.dataLayer || [];
+                                function gtag(){dataLayer.push(arguments);}
+                                gtag('js', new Date());
+                                gtag('config', '${google_analytics_id}');
+                            `,
+                        }}
+                    />
+                )}
                 <meta charSet="utf-8" />
                 <meta
                     name="viewport"
@@ -60,11 +77,15 @@ export default function ServerHTML({
                     rel="stylesheet"
                     href="/assets/plugins/editor.md/css/editormd.css"
                 />
+                <script src="/assets/js/tron-ads-sdk-1.0.49.js" />
                 <script src="/assets/js/jquery-3.6.0.min.js" />
-                <script src="/assets/plugins/editor.md/editormd.js" />
-                {locale !== 'zh' && (
-                    <script src="/assets/plugins/editor.md/languages/en.js" />
+                {false && (
+                    <script src="/assets/plugins/editor.md/editormd.js" />
                 )}
+                {false &&
+                    locale !== 'zh' && (
+                        <script src="/assets/plugins/editor.md/languages/en.js" />
+                    )}
                 <link rel="manifest" href="/static/manifest.json" />
                 <link rel="icon" type="image/x-icon" href="/favicon.ico?v=2" />
                 <link
@@ -185,39 +206,6 @@ export default function ServerHTML({
                         type="text/css"
                     />
                 ))}
-                {gptEnabled ? (
-                    <script
-                        dangerouslySetInnerHTML={{
-                            __html: `
-                            (function() {
-                              var bsa_optimize = document.createElement('script');
-                              window.optimize = { queue: [] };
-                              bsa_optimize.type = 'text/javascript';
-                              bsa_optimize.async = true;
-                              bsa_optimize.src = 'https://cdn-s2s.buysellads.net/pub/steemit.js?' + (new Date() - new Date() % 3600000);
-                              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(bsa_optimize);
-                            })();
-                        `,
-                        }}
-                    />
-                ) : null}
-                {gptEnabled ? (
-                    <script
-                        src="//m.servedby-buysellads.com/monetization.js"
-                        type="text/javascript"
-                    />
-                ) : null}
-                {shouldSeeCookieConsent ? (
-                    <script
-                        id="Cookiebot"
-                        src="https://consent.cookiebot.com/uc.js"
-                        data-cbid={cookieConsentApiKey}
-                        type="text/javascript"
-                        async
-                    />
-                ) : null}
-                {process.env.NODE_ENV === 'production' &&
-                    1 === 0 && <script src="//cdn.catchjs.com/catch.js" />}
                 <title>{page_title}</title>
             </head>
             <body>
@@ -230,19 +218,6 @@ export default function ServerHTML({
                 {assets.script.map((href, idx) => (
                     <script key={idx} src={href} />
                 ))}
-                {/* gptEnabled ? (
-                    <script
-                        dangerouslySetInnerHTML={{
-                            __html: `
-                            (function(){
-                              if(typeof _bsa !== 'undefined' && _bsa) {
-                                _bsa.init('fancybar', 'CE7D653L', 'placement:steemitcom');
-                              }
-                            })();
-                        `,
-                        }}
-                    />
-                      ) : null*/}
             </body>
         </html>
     );
