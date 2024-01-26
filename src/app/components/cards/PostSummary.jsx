@@ -24,6 +24,7 @@ import Userpic, { SIZE_SMALL } from 'app/components/elements/Userpic';
 import SearchUserList from 'app/components/cards/SearchUserList';
 import { SIGNUP_URL } from 'shared/constants';
 import { hasNsfwTag } from 'app/utils/StateFunctions';
+import Bookmark from '../elements/Bookmark';
 
 const CURATOR_VESTS_THRESHOLD = 1.0 * 1000.0 * 1000.0;
 
@@ -92,6 +93,7 @@ class PostSummary extends React.Component {
         const isNsfw = hasNsfwTag(post);
         const isReply = post.get('depth') > 0;
         const showReblog = !isReply;
+        const showBookmark = true; // posts and comments
         const full_power = post.get('percent_steem_dollars') === 0;
 
         const author = post.get('author');
@@ -220,6 +222,12 @@ class PostSummary extends React.Component {
                 <span className="PostSummary__time_author_category">
                     {showReblog && (
                         <Reblog
+                            author={post.get('author')}
+                            permlink={post.get('permlink')}
+                        />
+                    )}
+                    {showBookmark && (
+                        <Bookmark
                             author={post.get('author')}
                             permlink={post.get('permlink')}
                         />

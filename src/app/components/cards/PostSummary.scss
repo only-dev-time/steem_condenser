@@ -170,7 +170,7 @@ ul.PostsList__summaries > li {
     border-left: themed('borderLight');
   }
 
-  .Reblog__button {
+  .Reblog__button, .Bookmark__button{
     margin-right: 1rem;
     padding-right: 1rem;
     border-right: transparent;
@@ -239,9 +239,9 @@ ul.PostsList__summaries > li {
   .PostSummary__time_author_category {
     margin-left: 0;
     border-left: 1px solid $color-border-light;
-    .Reblog__button {
-      margin-right: 1rem;
-      padding-right: 1rem;
+    .Reblog__button, .Bookmark__button {
+      margin-right: 0.7rem;
+      padding-right: 0.7rem;
       border-right: none;
     }
   }

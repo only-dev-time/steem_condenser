@@ -138,7 +138,7 @@
     white-space: normal;
   }
 
-  .Reblog__button {
+  .Reblog__button, .Bookmark__button {
     padding-right: .4rem;
     margin-right: .4rem;
     @include themify($themes) {

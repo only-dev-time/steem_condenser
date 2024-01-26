@@ -421,7 +421,7 @@ ul.TemplatesList__summaries > li {
         min-height: 80px;
         .TemplateSummary__footer {
             margin-top: 0.2rem;
-            .Reblog__button {
+            .Reblog__button, .Bookmark__button {
                 display: none;
             }
             .Voting__button {

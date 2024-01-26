@@ -22,6 +22,7 @@ import ContentEditedWrapper from '../elements/ContentEditedWrapper';
 import { allowDelete } from 'app/utils/StateFunctions';
 import { Role } from 'app/utils/Community';
 import { userActionRecord } from 'app/utils/ServerApiClient';
+import Bookmark from '../elements/Bookmark';
 
 export function sortComments(cont, comments, sort_order) {
     const rshares = post => Long.fromString(String(post.get('net_rshares')));
@@ -220,6 +221,7 @@ class CommentImpl extends React.Component {
         const allowReply = Role.canComment(community, viewer_role);
         const canEdit = username && username === author;
         const canDelete = username && username === author && allowDelete(post);
+        const canBookmark = true; // posts and comments
         const canReply = allowReply && comment.depth < 255;
         const canMute = username && Role.atLeast(viewer_role, 'mod');
         const canFlag =
@@ -244,6 +246,12 @@ class CommentImpl extends React.Component {
                 <div>
                     <Voting post={post} />
                     <span className="Comment__footer__controls">
+                        {canBookmark && (
+                            <Bookmark
+                                author={author}
+                                permlink={post.get('permlink')}
+                            />
+                        )}
                         {canReply && (
                             <a onClick={onShowReply}>{tt('g.reply')}</a>
                         )}{' '}

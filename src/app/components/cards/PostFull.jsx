@@ -8,6 +8,7 @@ import * as transactionActions from 'app/redux/TransactionReducer';
 import * as globalActions from 'app/redux/GlobalReducer';
 import Voting from 'app/components/elements/Voting';
 import Reblog from 'app/components/elements/Reblog';
+import Bookmark from 'app/components/elements/Bookmark';
 import MarkdownViewer from 'app/components/cards/MarkdownViewer';
 import ReplyEditor from 'app/components/elements/ReplyEditor';
 import { immutableAccessor } from 'app/utils/Accessors';
@@ -407,6 +408,7 @@ class PostFull extends React.Component {
 
         const allowReply = Role.canComment(community, viewer_role);
         const canReblog = !isReply;
+        const canBookmark = true; //posts and comments can be bookmarked
         const canPromote = false && !post.get('is_paidout') && !isReply;
         const canPin =
             post.get('depth') == 0 && Role.atLeast(viewer_role, 'mod');
@@ -476,6 +478,9 @@ class PostFull extends React.Component {
                     <div className="RightShare__Menu small-11 medium-12 large-4 columns">
                         {canReblog && (
                             <Reblog author={author} permlink={permlink} />
+                        )}
+                        {canBookmark && (
+                            <Bookmark author={author} permlink={permlink} />
                         )}
                         <span className="PostFull__reply">
                             {/* all */}

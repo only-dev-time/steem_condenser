@@ -1,0 +1,41 @@
+.Bookmark__button {
+  path {
+    @include themify($themes) {
+      fill: themed('iconColorSecondary');
+    }
+  }
+  .Icon:hover {
+    .inner-path {
+      fill-opacity: 1;
+    }
+  }
+}
+
+.Bookmark__button-active {
+  path {
+    @include themify($themes) {
+      fill: themed('colorAccent');
+    }
+  }
+  .inner-path {
+    fill-opacity: 1;
+  }
+  .Icon:hover {
+    .inner-path {
+      fill-opacity: 0;
+    }
+  }
+}
+
+.Bookmark__button.loading {
+  padding-right: 0.5rem;
+  svg {
+    border: 1px solid $color-teal;
+    border-radius: 100%;
+    border-right-color: transparent;
+    border-top-color: transparent;
+    animation: loading 500ms infinite linear;
+    path {opacity: 0}
+  }
+}
+

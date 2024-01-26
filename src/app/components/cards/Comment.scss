@@ -170,7 +170,16 @@
             margin: 0 0.2rem;
         }
     }
+
+    .Bookmark__button {
+        padding-right: .4rem;
+        margin-right: .4rem;
+        @include themify($themes) {
+          border-right: themed('border');
+        }
+    }
 }
+
 
 .Comment__replies {
     margin-top: 1.4rem;
