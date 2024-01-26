@@ -21,6 +21,7 @@
         "close": "Fermer",
         "collapse_or_expand": "Compacter / Etendre",
         "comments": "Commentaires",
+        "bookmarks": "Bookmarks",
         "confirm": "Confirmer",
         "convert": "Convertir",
         "date": "Date",
@@ -191,6 +192,8 @@
             "Un seul compte Steem est permis par adresse IP toutes les 10 minutes",
         "resteem_this_post": "Resteemer cet article",
         "reblog": "Resteem",
+        "add_bookmark": "Add bookmark for this post",
+        "remove_bookmark": "Remove bookmark for this post",
         "write_your_story": "Ecris ton histoire",
         "remember_voting_and_posting_key":
             "Se souvenir de la clé de publication et de vote",
@@ -384,6 +387,8 @@
             "Il semblerait que %(name)s ne soit fan de personne. Dans le cas où %(name)s s'abonnerait au fil d'autres utilisateurs, son flux sera automatiquement rempli avec du nouveau contenu.",
         "user_hasnt_had_any_replies_yet":
             "%(name)s n'a pas encore reçu de réponse",
+        "user_hasnt_added_any_bookmarks_yet":
+            "%(name)s hasn't added any bookmarks yet",
         "looks_like_you_havent_posted_anything_yet":
             "Looks like you haven't posted anything yet.",
         "create_a_post": "Create a Post",
@@ -563,7 +568,8 @@
         "curation_rewards_by": "Gains de curation de",
         "author_rewards_by": "Gains de publication de",
         "replies_to": "Réponses à",
-        "comments_by": "Commentaires de"
+        "comments_by": "Commentaires de",
+        "bookmarks_from": "Bookmarks from %(username)s"
     },
     "loginform_jsx": {
         "you_need_a_private_password_or_key":

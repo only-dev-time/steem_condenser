@@ -21,6 +21,7 @@
         "close": "Chiudi",
         "collapse_or_expand": "Riduci/Espandi",
         "comments": "Commenti",
+        "bookmarks": "Bookmarks",
         "confirm": "Conferma",
         "convert": "Converti",
         "date": "Data",
@@ -183,6 +184,8 @@
             "è possibile utilizzare un solo Steem account per indirizzo IP ogni 10 minuti",
         "resteem_this_post": "Fai il resteem di questo post",
         "reblog": "Resteem",
+        "add_bookmark": "Add bookmark for this post",
+        "remove_bookmark": "Remove bookmark for this post",
         "write_your_story": "Scrivi la tua storia",
         "remember_voting_and_posting_key":
             "Ricorda la chiave di voto e di pubblicazione",
@@ -372,6 +375,8 @@
         "user_hasnt_followed_anything_yet":
             "Sembra che %(name)snon stia seguendo ancora nessuno! Se %(name)sha aggiunto di recente nuovi utenti da seguire, il feed personalizzato si riempirà di contenuti non appena ce ne saranno di nuovi. ",
         "user_hasnt_had_any_replies_yet": "%(name)s hasn't had any replies yet",
+        "user_hasnt_added_any_bookmarks_yet":
+            "%(name)s hasn't added any bookmarks yet",
         "looks_like_you_havent_posted_anything_yet":
             "Looks like you haven't posted anything yet.",
         "create_a_post": "Create a Post",
@@ -549,7 +554,8 @@
         "curation_rewards_by": "Ricompense da curatore da",
         "author_rewards_by": "Ricompense da autore da",
         "replies_to": "Risposte a ",
-        "comments_by": "Commenti di"
+        "comments_by": "Commenti di",
+        "bookmarks_from": "Bookmarks from %(username)s"
     },
     "loginform_jsx": {
         "you_need_a_private_password_or_key":

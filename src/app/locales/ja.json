@@ -21,6 +21,7 @@
         "close": "閉じる",
         "collapse_or_expand": "折りたたみ/展開",
         "comments": "コメント",
+        "bookmarks": "Bookmarks",
         "confirm": "確認",
         "convert": "変換する",
         "date": "日時",
@@ -183,6 +184,8 @@
             "10分毎に各IPアドレスにつき1つのSteemアカウントのみ許可されています",
         "resteem_this_post": "この投稿をResteemする",
         "reblog": "Resteem",
+        "add_bookmark": "Add bookmark for this post",
+        "remove_bookmark": "Remove bookmark for this post",
         "write_your_story": "投稿内容を書いてください",
         "remember_voting_and_posting_key": "投稿キーを記憶する",
         "auto_login_question_mark": "自動ログインしますか？",
@@ -370,6 +373,8 @@
         "user_hasnt_followed_anything_yet":
             "%(name)sはまだ誰もフォローしていません！%(name)sが最近新しいユーザーをフォローした場合、新しいコンテンツが有効になると個々のフィードに追加されます。",
         "user_hasnt_had_any_replies_yet": "%(name)sへの返信はまだありません。",
+        "user_hasnt_added_any_bookmarks_yet":
+            "%(name)s hasn't added any bookmarks yet",
         "looks_like_you_havent_posted_anything_yet":
             "あなたはまだ1つも投稿していないようです！",
         "create_a_post": "投稿を作成する",
@@ -548,7 +553,8 @@
         "curation_rewards_by": "のキュレーション報酬",
         "author_rewards_by": "の投稿者報酬",
         "replies_to": "への返信",
-        "comments_by": "のコメント"
+        "comments_by": "のコメント",
+        "bookmarks_from": "Bookmarks from %(username)s"
     },
     "loginform_jsx": {
         "you_need_a_private_password_or_key":

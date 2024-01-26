@@ -21,6 +21,7 @@
         "close": "닫기",
         "collapse_or_expand": "닫기/펼치기",
         "comments": "작성한 댓글",
+        "bookmarks": "Bookmarks",
         "confirm": "확인",
         "convert": "변환하기",
         "date": "날짜",
@@ -182,6 +183,8 @@
             "매 10 분마다 IP 주소 당 단 하나의 Steem 계정만 허용됩니다.",
         "resteem_this_post": "Resteem This Post",
         "reblog": "리스팀",
+        "add_bookmark": "Add bookmark for this post",
+        "remove_bookmark": "Remove bookmark for this post",
         "write_your_story": "내용을 입력하세요",
         "remember_voting_and_posting_key": "Remember voting & posting key",
         "auto_login_question_mark": "자동 로그인",
@@ -368,6 +371,8 @@
         "user_hasnt_followed_anything_yet":
             "Looks like %(name)s might not be following anyone yet! If %(name)s recently added new users to follow, their personalized feed will populate once new content is available.",
         "user_hasnt_had_any_replies_yet": "%(name)s hasn't had any replies yet",
+        "user_hasnt_added_any_bookmarks_yet":
+            "%(name)s hasn't added any bookmarks yet",
         "looks_like_you_havent_posted_anything_yet":
             "아직 포스팅을 하지 않았습니다.",
         "create_a_post": "글쓰기",
@@ -545,7 +550,8 @@
         "curation_rewards_by": "Curation rewards by",
         "author_rewards_by": "Author rewards by",
         "replies_to": "Replies to",
-        "comments_by": "Comments by"
+        "comments_by": "Comments by",
+        "bookmarks_from": "Bookmarks from %(username)s"
     },
     "loginform_jsx": {
         "you_need_a_private_password_or_key":

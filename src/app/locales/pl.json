@@ -21,6 +21,7 @@
         "close": "Zamknij",
         "collapse_or_expand": "Zwiń/Rozwiń",
         "comments": "Komentarze",
+        "bookmarks": "Bookmarks",
         "confirm": "Potwierdź",
         "convert": "Konwersja",
         "date": "Data",
@@ -180,6 +181,8 @@
             "Dozwolone jest tylko jedno konto Steem dla danego adresu IP w ciągu 10 minut",
         "resteem_this_post": "Resteemuj ten post",
         "reblog": "Resteem",
+        "add_bookmark": "Add bookmark for this post",
+        "remove_bookmark": "Remove bookmark for this post",
         "write_your_story": "Napisz swoją historię",
         "remember_voting_and_posting_key":
             "Zapamiętaj klucze do głosowania i tworzenia wpisów",
@@ -360,6 +363,8 @@
             "Wygląda na to, że użytkownik %(name)s jeszcze nikogo nie obserwuje. Jeśli %(name)s zaczął(ęła) obserwować nowych użytkowników jego(jej) osobisty strumień zacznie się zapełniać, gdy powstaną nowe treści.  ",
         "user_hasnt_had_any_replies_yet":
             "%(name)s nie ma jeszcze żadnych odpowiedzi",
+        "user_hasnt_added_any_bookmarks_yet":
+            "%(name)s hasn't added any bookmarks yet",
         "followers": "Obserwujący",
         "this_is_users_reputations_score_it_is_based_on_history_of_votes":
             "To są punkty reputacji użytkownika %(name)s.\n\nSystem punktów reputacji bazuje na historii otrzymanych przez użytkownika głosów i jest używany do ukrywania wpisów o niskiej jakości.",
@@ -533,7 +538,8 @@
         "curation_rewards_by": "Wynagrodzenia kuratorskie",
         "author_rewards_by": "Wynagrodzenia autorskie",
         "replies_to": "Odpowiedzi do",
-        "comments_by": "Komentarze"
+        "comments_by": "Komentarze",
+        "bookmarks_from": "Bookmarks from %(username)s"
     },
     "loginform_jsx": {
         "you_need_a_private_password_or_key":

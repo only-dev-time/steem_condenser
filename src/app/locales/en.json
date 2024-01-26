@@ -37,6 +37,7 @@
         "community_user_title_edit_header": "Change User Title",
         "community_user_title_edit_description": "Set Title for @%(username)s",
         "comments": "Comments",
+        "bookmarks": "Bookmarks",
         "confirm": "Confirm",
         "convert": "Convert",
         "date": "Date",
@@ -226,6 +227,8 @@
             "Only one Steem account allowed per IP address every 10 minutes",
         "resteem_this_post": "Resteem This Post",
         "reblog": "Resteem",
+        "add_bookmark": "Add bookmark for this post",
+        "remove_bookmark": "Remove bookmark for this post",
         "write_your_story": "Write your story...",
         "remember_voting_and_posting_key": "Remember voting & posting key",
         "auto_login_question_mark": "Auto login?",
@@ -430,6 +433,8 @@
         "user_hasnt_followed_anything_yet":
             "Looks like %(name)s might not be following anyone yet! If %(name)s recently added new users to follow, their personalized feed will populate once new content is available.",
         "user_hasnt_had_any_replies_yet": "%(name)s hasn't had any replies yet",
+        "user_hasnt_added_any_bookmarks_yet":
+            "%(name)s hasn't added any bookmarks yet",
         "user_hasnt_had_any_notifications_yet":
             "%(name)s hasn't had any notifications yet",
         "looks_like_you_havent_posted_anything_yet":
@@ -624,7 +629,8 @@
         "author_rewards_by": "Author rewards by %(username)s",
         "replies_to": "Replies to %(username)s",
         "posts_by": "Posts by %(username)s",
-        "comments_by": "Comments by %(username)s"
+        "comments_by": "Comments by %(username)s",
+        "bookmarks_from": "Bookmarks from %(username)s"
     },
     "loginform_jsx": {
         "you_need_a_private_password_or_key":

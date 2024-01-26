@@ -21,6 +21,7 @@
         "close": "Cerrar",
         "collapse_or_expand": "Plegar/Expandir",
         "comments": "Comentarios",
+        "bookmarks": "Bookmarks",
         "confirm": "Confirmar",
         "convert": "Convertir",
         "date": "Fecha",
@@ -183,6 +184,8 @@
             "Sólo una cuenta Steem permitida por dirección IP cada 10 minutos",
         "resteem_this_post": "Reesteemea esta Publicación",
         "reblog": "Reesteemear",
+        "add_bookmark": "Add bookmark for this post",
+        "remove_bookmark": "Remove bookmark for this post",
         "write_your_story": "Escribe tu historia",
         "remember_voting_and_posting_key":
             "Recuerda la clave de voto y de publicación",
@@ -366,6 +369,8 @@
             "Parece que %(name)s aún no está siguiendo a nadie. Si %(name)s acaba de añadir nuevas cuentas para seguir, el feed personalizado aparecerá cuando el nuevo contenido esté disponible.",
         "user_hasnt_had_any_replies_yet":
             "%(name)s todavía no ha tenido ninguna respuesta",
+        "user_hasnt_added_any_bookmarks_yet":
+            "%(name)s hasn't added any bookmarks yet",
         "looks_like_you_havent_posted_anything_yet":
             "Looks like you haven't posted anything yet.",
         "create_a_post": "Create a Post",
@@ -544,7 +549,8 @@
         "curation_rewards_by": "Recompensas de curación de",
         "author_rewards_by": "Recompensas de autor de",
         "replies_to": "Respuestas a",
-        "comments_by": "Comentarios de"
+        "comments_by": "Comentarios de",
+        "bookmarks_from": "Bookmarks from %(username)s"
     },
     "loginform_jsx": {
         "you_need_a_private_password_or_key":

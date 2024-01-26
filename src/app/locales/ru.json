@@ -21,6 +21,7 @@
         "close": "Закрыть",
         "collapse_or_expand": "Свернуть/Развернуть",
         "comments": "Комментарии",
+        "bookmarks": "Bookmarks",
         "confirm": "Подтвердить",
         "convert": "Конвертировать",
         "date": "Дата",
@@ -180,6 +181,8 @@
             "Только один Steem аккаунт разрешен с одного IP адреса каждые десять минут",
         "resteem_this_post": "Поделиться этим постом",
         "reblog": "Поделиться",
+        "add_bookmark": "Add bookmark for this post",
+        "remove_bookmark": "Remove bookmark for this post",
         "write_your_story": "Написать свою историю",
         "remember_voting_and_posting_key": "Запомнить голос и постинг ключ",
         "auto_login_question_mark": "Заходить автоматически?",
@@ -374,6 +377,8 @@
         "user_hasnt_followed_anything_yet":
             "Похоже, что %(name)s еще ни на кого не подписан! Если, %(name)s недавно подписался на новых пользователей, их персонализированный канал будет заполняться сразу после появления нового контента.",
         "user_hasnt_had_any_replies_yet": "%(name)s еще не получил ответов",
+        "user_hasnt_added_any_bookmarks_yet":
+            "%(name)s hasn't added any bookmarks yet",
         "looks_like_you_havent_posted_anything_yet":
             "Похоже, ты еще ничего не опубликовал.",
         "create_a_post": "Создать сообщение",
@@ -565,7 +570,8 @@
         "curation_rewards_by": "Награда за курирование",
         "author_rewards_by": "Автор награжден",
         "replies_to": "Ответы на",
-        "comments_by": "Комментарии"
+        "comments_by": "Комментарии",
+        "bookmarks_from": "Bookmarks from %(username)s"
     },
     "loginform_jsx": {
         "you_need_a_private_password_or_key":
