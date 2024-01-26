@@ -32,6 +32,7 @@ const GET_UNREAD_ACCOUNT_NOTIFICATIONS =
     'fetchDataSaga/GET_UNREAD_ACCOUNT_NOTIFICATIONS';
 const MARK_NOTIFICATIONS_AS_READ = 'fetchDataSaga/MARK_NOTIFICATIONS_AS_READ';
 const GET_REWARDS_DATA = 'fetchDataSaga/GET_REWARDS_DATA';
+const GET_BOOKMARKED_POSTS = 'fetchDataSaga/GET_BOOKMARKED_POSTS';
 
 export const fetchDataWatches = [
     takeLatest(REQUEST_DATA, fetchData),
@@ -52,6 +53,7 @@ export const fetchDataWatches = [
     ),
     takeEvery(GET_REWARDS_DATA, getRewardsDataSaga),
     takeEvery(MARK_NOTIFICATIONS_AS_READ, markNotificationsAsReadSaga),
+    takeEvery(GET_BOOKMARKED_POSTS, getBookmarkedPostsSaga),
 ];
 
 export function* getPostHeader(action) {
@@ -537,6 +539,33 @@ export function* getRewardsDataSaga(action) {
     yield put(appActions.fetchDataEnd());
 }
 
+export function* getBookmarkedPostsSaga(action) {
+    yield put(appActions.fetchDataBegin());
+    try {
+        const bookmarks = yield call(callBridge, 'get_bookmarked_posts', {
+            account: action.payload.account,
+        });
+        if (bookmarks && bookmarks.error) {
+            console.error(
+                '~~ Saga getBookmarkedPosts error ~~>',
+                bookmarks.error
+            );
+            yield put(appActions.steemApiError(bookmarks.error.message));
+        } else {
+            yield put(
+                globalActions.receiveBookmarkedPosts({
+                    bookmarks,
+                    account: action.payload.account,
+                })
+            );
+        }
+    } catch (error) {
+        console.error('~~ Saga getBookmarkedPosts error ~~>', error);
+        yield put(appActions.steemApiError(error.message));
+    }
+    yield put(appActions.fetchDataEnd());
+}
+
 // Action creators
 export const actions = {
     listCommunities: payload => ({
@@ -603,6 +632,11 @@ export const actions = {
 
     getRewardsData: payload => ({
         type: GET_REWARDS_DATA,
+        payload,
+    }),
+
+    getBookmarkedPosts: payload => ({
+        type: GET_BOOKMARKED_POSTS,
         payload,
     }),
 };

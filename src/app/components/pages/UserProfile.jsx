@@ -32,6 +32,8 @@ const emptyPostsText = (section, account, isMyAccount) => {
         );
     } else if (section == 'payout') {
         return 'No pending payouts.';
+    } else if (section == 'bookmarks') {
+        return tt('user_profile.user_hasnt_added_any_bookmarks_yet', { name });
     } else if (section == 'blog' && !isMyAccount) {
         return tt('user_profile.user_hasnt_started_bloggin_yet', { name });
     } else if (section == 'blog') {
@@ -83,6 +85,7 @@ export default class UserProfile extends React.Component {
         } = this.props;
         this.props.setRouteTag(accountname, section);
         if (!profile) fetchProfile(accountname, username);
+        if (section === 'bookmarks') this.props.getBookmarkedPosts(accountname);
     }
 
     componentWillUpdate(nextProps) {
@@ -96,12 +99,20 @@ export default class UserProfile extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        const { profile, accountname, fetchProfile, username } = this.props;
+        const {
+            profile,
+            accountname,
+            fetchProfile,
+            username,
+            section,
+        } = this.props;
         if (
             prevProps.accountname != accountname ||
             prevProps.username != username
         ) {
             if (!profile) fetchProfile(accountname, username);
+            if (section === 'bookmarks')
+                this.props.getBookmarkedPosts(accountname);
         }
     }
 
@@ -116,12 +127,15 @@ export default class UserProfile extends React.Component {
             np.blogmode !== this.props.blogmode ||
             np.posts !== this.props.posts ||
             np.profile !== this.props.profile ||
-            np.notifications !== this.props.notifications
+            np.notifications !== this.props.notifications ||
+            np.bookmarks !== this.props.bookmarks
         );
     }
 
     loadMore() {
-        const last_post = this.props.posts ? this.props.posts.last() : null;
+        const posts = this.props.posts || this.props.bookmarks;
+        const last_post = posts ? posts.last() : null;
+        console.log('loadMore', last_post, this.props);
         if (!last_post) return;
         //if (last_post == this.props.pending) return; // if last post is 'pending', its an invalid start token
         const { username, status, order, category } = this.props;
@@ -130,6 +144,7 @@ export default class UserProfile extends React.Component {
 
         const [author, permlink] = last_post.split('/');
         this.props.requestData({
+            // TODO das Laden von posts und bookmarks muss noch getrennt werden
             author,
             permlink,
             order,
@@ -154,6 +169,7 @@ export default class UserProfile extends React.Component {
                 profile,
                 notifications,
                 subscriptions,
+                bookmarks,
             },
         } = this;
         console.log(walletUrl);
@@ -219,6 +235,14 @@ export default class UserProfile extends React.Component {
         } else if (section === 'settings') {
             // account display settings
             tab_content = <Settings routeParams={this.props.routeParams} />;
+        } else if (section === 'bookmarks') {
+            tab_content = (
+                <PostsList
+                    post_refs={bookmarks}
+                    loading={fetching}
+                    loadMore={this.loadMore}
+                />
+            );
         } else if (!posts) {
             // post lists -- not loaded
             tab_content = (
@@ -255,13 +279,14 @@ export default class UserProfile extends React.Component {
 
         let tab_header;
         let top_active = section;
-        if (['posts', 'comments', 'payout'].includes(section)) {
+        if (['posts', 'comments', 'payout', 'bookmarks'].includes(section)) {
             top_active = 'posts';
             tab_header = (
                 <div className="UserProfile__postmenu">
                     {_tablink2('posts', tt('g.posts'))}
                     {_tablink2('comments', tt('g.comments'))}
                     {_tablink2('payout', tt('g.payouts'))}
+                    {_tablink2('bookmarks', tt('g.bookmarks'))}
                 </div>
             );
         }
@@ -352,6 +377,7 @@ module.exports = {
                 'comments',
                 'replies',
                 'payout',
+                'bookmarks',
             ].includes(section)
                 ? section
                 : null;
@@ -394,6 +420,9 @@ module.exports = {
                 ])
                     ? state.global.getIn(['subscriptions', accountname]).toJS()
                     : [],
+                bookmarks: state.global.getIn(['bookmarkedPosts', accountname])
+                    ? state.global.getIn(['bookmarkedPosts', accountname])
+                    : [],
             };
         },
         dispatch => ({
@@ -413,6 +442,8 @@ module.exports = {
                         params: { username: accountname, section },
                     })
                 ),
+            getBookmarkedPosts: account =>
+                dispatch(fetchDataSagaActions.getBookmarkedPosts({ account })),
         })
     )(UserProfile),
 };

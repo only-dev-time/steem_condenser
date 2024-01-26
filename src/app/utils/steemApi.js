@@ -47,10 +47,12 @@ export async function getStateAsync(url, observer, ssr = false) {
 
         // load `content` and `discussion_idx`
         if (page == 'posts' || page == 'account') {
-            let posts = await loadPosts(sort, tag, observer, ssr);
-
-            state['content'] = posts['content'];
-            state['discussion_idx'] = posts['discussion_idx'];
+            if (sort !== 'bookmarks') {
+                // if section(sort) bookmark don't load posts
+                let posts = await loadPosts(sort, tag, observer, ssr);
+                state['discussion_idx'] = posts['discussion_idx'];
+                state['content'] = posts['content'];
+            }
         } else if (page == 'thread') {
             const posts = await loadThread(key[0], key[1]);
             state['content'] = posts['content'];
@@ -164,6 +166,7 @@ function parsePath(url) {
         'comments',
         'replies',
         'payout',
+        'bookmarks',
     ];
 
     let page = null;

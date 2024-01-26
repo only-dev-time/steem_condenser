@@ -227,6 +227,11 @@ class Header extends React.Component {
                     username: user_title,
                 });
             }
+            if (route.params[1] === 'bookmarks') {
+                page_title = tt('header_jsx.bookmarks_from', {
+                    username: user_title,
+                });
+            }
         } else {
             page_name = ''; //page_title = route.page.replace( /([a-z])([A-Z])/g, '$1 $2' ).toLowerCase();
         }
@@ -280,6 +285,7 @@ class Header extends React.Component {
         const replies_link = `/@${username}/replies`;
         const account_link = `/@${username}`;
         const comments_link = `/@${username}/comments`;
+        const bookmarks_link = `/@${username}/bookmarks`;
         const notifs_link = `/@${username}/notifications`;
         const wallet_link = `${walletUrl}/@${username}`;
         const notif_label =
@@ -292,6 +298,11 @@ class Header extends React.Component {
             { link: account_link, icon: 'profile', value: tt('g.profile') },
             { link: notifs_link, icon: 'clock', value: notif_label },
             { link: comments_link, icon: 'chatbox', value: tt('g.comments') },
+            {
+                link: bookmarks_link,
+                icon: 'bookmark',
+                value: tt('g.bookmarks'),
+            },
             { link: replies_link, icon: 'reply', value: tt('g.replies') },
             //{ link: settings_link, icon: 'cog', value: tt('g.settings') },
             {
