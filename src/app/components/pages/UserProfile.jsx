@@ -194,6 +194,7 @@ export default class UserProfile extends React.Component {
 
         const isMyAccount = username === accountname;
         let tab_content = null;
+        const view_posts = section === 'bookmarks' ? bookmarks : posts;
         if (userIllegalContent.includes(accountname)) {
             // invalid users
             tab_content = <div>Unavailable For Legal Reasons.</div>;
@@ -235,22 +236,14 @@ export default class UserProfile extends React.Component {
         } else if (section === 'settings') {
             // account display settings
             tab_content = <Settings routeParams={this.props.routeParams} />;
-        } else if (section === 'bookmarks') {
-            tab_content = (
-                <PostsList
-                    post_refs={bookmarks}
-                    loading={fetching}
-                    loadMore={this.loadMore}
-                />
-            );
-        } else if (!posts) {
+        } else if (!view_posts) {
             // post lists -- not loaded
             tab_content = (
                 <center>
                     <LoadingIndicator type="circle" />
                 </center>
             );
-        } else if (!fetching && !posts.size) {
+        } else if (!fetching && !view_posts.size) {
             // post lists -- empty
             const emptyText = emptyPostsText(section, accountname, isMyAccount);
             tab_content = <Callout>{emptyText}</Callout>;
@@ -258,7 +251,7 @@ export default class UserProfile extends React.Component {
             // post lists -- loaded
             tab_content = (
                 <PostsList
-                    post_refs={posts}
+                    post_refs={view_posts}
                     loading={fetching}
                     loadMore={this.loadMore}
                 />
