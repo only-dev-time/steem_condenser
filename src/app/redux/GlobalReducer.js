@@ -17,7 +17,6 @@ const RECEIVE_COMMUNITY = 'global/RECEIVE_COMMUNITY';
 const RECEIVE_COMMUNITIES = 'global/RECEIVE_COMMUNITIES';
 const LOADING_SUBSCRIPTIONS = 'global/LOADING_SUBSCRIPTIONS';
 const RECEIVE_SUBSCRIPTIONS = 'global/RECEIVE_SUBSCRIPTIONS';
-const RECEIVE_BOOKMARKED_POSTS = 'global/RECEIVE_BOOKMARKED_POSTS';
 const SYNC_SPECIAL_POSTS = 'global/SYNC_SPECIAL_POSTS';
 const RECEIVE_CONTENT = 'global/RECEIVE_CONTENT';
 const LINK_REPLY = 'global/LINK_REPLY';
@@ -158,29 +157,6 @@ export default function reducer(state = defaultState, action = {}) {
         }
         case RECEIVE_REWARDS: {
             return state.set('rewards', fromJS(payload.rewards));
-        }
-
-        case RECEIVE_BOOKMARKED_POSTS: {
-            const bookmarks = fromJS(payload.bookmarks);
-            const bkey = ['bookmarkedPosts', payload.account];
-
-            let new_state = state.setIn(
-                bkey,
-                bookmarks.map(b => b.get('author') + '/' + b.get('permlink'))
-            );
-
-            new_state = new_state.updateIn(['content'], content => {
-                return content.withMutations(map => {
-                    bookmarks.forEach(value => {
-                        const key = `${value.get('author')}/${value.get(
-                            'permlink'
-                        )}`;
-                        map.set(key, value);
-                    });
-                });
-            });
-
-            return new_state;
         }
 
         case NOTICES: {
@@ -456,11 +432,6 @@ export const receiveCommunity = payload => ({
 
 export const receiveSubscriptions = payload => ({
     type: RECEIVE_SUBSCRIPTIONS,
-    payload,
-});
-
-export const receiveBookmarkedPosts = payload => ({
-    type: RECEIVE_BOOKMARKED_POSTS,
     payload,
 });
 

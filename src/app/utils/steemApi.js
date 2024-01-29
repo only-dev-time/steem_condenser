@@ -47,12 +47,9 @@ export async function getStateAsync(url, observer, ssr = false) {
 
         // load `content` and `discussion_idx`
         if (page == 'posts' || page == 'account') {
-            if (sort !== 'bookmarks') {
-                // if section(sort) bookmark don't load posts
-                let posts = await loadPosts(sort, tag, observer, ssr);
-                state['discussion_idx'] = posts['discussion_idx'];
-                state['content'] = posts['content'];
-            }
+            let posts = await loadPosts(sort, tag, observer, ssr);
+            state['discussion_idx'] = posts['discussion_idx'];
+            state['content'] = posts['content'];
         } else if (page == 'thread') {
             const posts = await loadThread(key[0], key[1]);
             state['content'] = posts['content'];
@@ -114,8 +111,13 @@ async function loadPosts(sort, tag, observer, ssr) {
 
     let posts;
     if (account) {
-        const params = { sort, account, observer };
-        posts = await callBridge('get_account_posts', params);
+        if (sort && sort === 'bookmarks') {
+            const params = { account };
+            posts = await callBridge('get_bookmarked_posts', params);
+        } else {
+            const params = { sort, account, observer };
+            posts = await callBridge('get_account_posts', params);
+        }
     } else {
         const params = { sort, tag, observer };
         posts = await callBridge('get_ranked_posts', params);

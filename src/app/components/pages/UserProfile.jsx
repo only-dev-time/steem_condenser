@@ -85,7 +85,6 @@ export default class UserProfile extends React.Component {
         } = this.props;
         this.props.setRouteTag(accountname, section);
         if (!profile) fetchProfile(accountname, username);
-        if (section === 'bookmarks') this.props.getBookmarkedPosts(accountname);
     }
 
     componentWillUpdate(nextProps) {
@@ -111,8 +110,6 @@ export default class UserProfile extends React.Component {
             prevProps.username != username
         ) {
             if (!profile) fetchProfile(accountname, username);
-            if (section === 'bookmarks')
-                this.props.getBookmarkedPosts(accountname);
         }
     }
 
@@ -127,15 +124,13 @@ export default class UserProfile extends React.Component {
             np.blogmode !== this.props.blogmode ||
             np.posts !== this.props.posts ||
             np.profile !== this.props.profile ||
-            np.notifications !== this.props.notifications ||
-            np.bookmarks !== this.props.bookmarks
+            np.notifications !== this.props.notifications
         );
     }
 
     loadMore() {
-        const posts = this.props.posts || this.props.bookmarks;
-        const last_post = posts ? posts.last() : null;
-        console.log('loadMore', last_post, this.props);
+        const last_post = this.props.posts ? this.props.posts.last() : null;
+
         if (!last_post) return;
         //if (last_post == this.props.pending) return; // if last post is 'pending', its an invalid start token
         const { username, status, order, category } = this.props;
@@ -144,7 +139,6 @@ export default class UserProfile extends React.Component {
 
         const [author, permlink] = last_post.split('/');
         this.props.requestData({
-            // TODO das Laden von posts und bookmarks muss noch getrennt werden
             author,
             permlink,
             order,
@@ -169,7 +163,6 @@ export default class UserProfile extends React.Component {
                 profile,
                 notifications,
                 subscriptions,
-                bookmarks,
             },
         } = this;
         console.log(walletUrl);
@@ -194,7 +187,6 @@ export default class UserProfile extends React.Component {
 
         const isMyAccount = username === accountname;
         let tab_content = null;
-        const view_posts = section === 'bookmarks' ? bookmarks : posts;
         if (userIllegalContent.includes(accountname)) {
             // invalid users
             tab_content = <div>Unavailable For Legal Reasons.</div>;
@@ -236,14 +228,14 @@ export default class UserProfile extends React.Component {
         } else if (section === 'settings') {
             // account display settings
             tab_content = <Settings routeParams={this.props.routeParams} />;
-        } else if (!view_posts) {
+        } else if (!posts) {
             // post lists -- not loaded
             tab_content = (
                 <center>
                     <LoadingIndicator type="circle" />
                 </center>
             );
-        } else if (!fetching && !view_posts.size) {
+        } else if (!fetching && !posts.size) {
             // post lists -- empty
             const emptyText = emptyPostsText(section, accountname, isMyAccount);
             tab_content = <Callout>{emptyText}</Callout>;
@@ -251,7 +243,7 @@ export default class UserProfile extends React.Component {
             // post lists -- loaded
             tab_content = (
                 <PostsList
-                    post_refs={view_posts}
+                    post_refs={posts}
                     loading={fetching}
                     loadMore={this.loadMore}
                 />
@@ -413,9 +405,6 @@ module.exports = {
                 ])
                     ? state.global.getIn(['subscriptions', accountname]).toJS()
                     : [],
-                bookmarks: state.global.getIn(['bookmarkedPosts', accountname])
-                    ? state.global.getIn(['bookmarkedPosts', accountname])
-                    : [],
             };
         },
         dispatch => ({
@@ -435,8 +424,6 @@ module.exports = {
                         params: { username: accountname, section },
                     })
                 ),
-            getBookmarkedPosts: account =>
-                dispatch(fetchDataSagaActions.getBookmarkedPosts({ account })),
         })
     )(UserProfile),
 };
