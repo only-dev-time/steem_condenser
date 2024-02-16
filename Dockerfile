@@ -10,6 +10,10 @@ ENV DOCKER_TAG ${DOCKER_TAG}
 
 RUN npm install -g yarn
 
+# domain taobao hat kein aktuelles Zertifikat, deshalb schlaegt die Installation der Pakete fehl
+# zertifikatspruefung tempraer abschalten
+RUN yarn config set "strict-ssl" false -g
+
 WORKDIR /var/app
 RUN mkdir -p /var/app
 ADD package.json yarn.lock /var/app/
