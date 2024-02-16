@@ -13,7 +13,7 @@
             "objectSrc": "'self' application/pdf",
             "scriptSrc": "'self' www.google-analytics.com www.googletagmanager.com connect.facebook.net *.tronads.io",
             "styleSrc": "'self' fonts.googleapis.com",
-            "reportUri": "/api/v1/csp_violation"
+            "reportUri": "-"
         },
         "reportOnly": false,
         "setAllHeaders": true
@@ -30,7 +30,7 @@
         "site_key": false
     },
     "server_session_secret": "exiKdyF+IwRIXJDmtGIl4vWUz4i3eVSISpfZoeYc0s4=",
-    "session_cookie_key": "stm-dev",
+    "session_cookie_key": "stm-prod",
     "session_key": "steemses",
     "site_domain": "moecki.online",
     "upload_image": "https://steemitimages.com",
