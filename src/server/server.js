@@ -162,6 +162,11 @@ function convertEntriesToArrays(obj) {
         conf.defaultSrc = [];
     }
     conf.defaultSrc.push(nonceCb);
+    // load inline styles
+    if (!conf.styleSrc) {
+        conf.styleSrc = [];
+    }
+    conf.styleSrc.push(nonceCb);
     return conf;
 }
 
