@@ -3,6 +3,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { List } from 'immutable';
+import { actions as fetchDataSagaActions } from 'app/redux/FetchDataSaga';
+import FeedsNavigationMenu from 'app/components/cards/FeedsNavigationMenu';
 import SidebarLinks from 'app/components/elements/SidebarLinks';
 import SidebarNewUsers from 'app/components/elements/SidebarNewUsers';
 import Notices from 'app/components/elements/Notices';
@@ -21,6 +23,17 @@ class PostsIndexLayout extends React.Component {
         topics: PropTypes.object,
     };
 
+    componentWillMount() {
+        const { subscriptions, getSubscriptions, username } = this.props;
+        if (!subscriptions && username) getSubscriptions(username);
+    }
+
+    componentDidUpdate(prevProps) {
+        const { subscriptions, getSubscriptions, username } = this.props;
+        if (!subscriptions && username && username != prevProps.username)
+            getSubscriptions(username);
+    }
+
     render() {
         const {
             topics,
@@ -37,7 +50,9 @@ class PostsIndexLayout extends React.Component {
             tronAdsConf,
             locale,
             routeTag,
+            routeTag,
         } = this.props;
+
         const adSwipeEnabled = adSwipeConf.getIn(['enabled']);
         const tronAdsEnabled = tronAdsConf.getIn(['enabled']);
         const tronAdSidebyPid = tronAdsConf.getIn(['sidebar_ad_pid']);
@@ -46,6 +61,13 @@ class PostsIndexLayout extends React.Component {
 
         return (
             <div>
+                <nav className="FeedsNavigation">
+                    <FeedsNavigationMenu
+                        routeTag={routeTag.routeTag}
+                        category={routeTag.params.category}
+                        order={routeTag.params.order}
+                    />
+                </nav>
                 <div
                     className={
                         'PostsIndex row ' +
@@ -76,9 +98,6 @@ class PostsIndexLayout extends React.Component {
                             !username && <SidebarNewUsers />}
                         {isBrowser &&
                             !community &&
-                            username && <Announcement />}
-                        {isBrowser &&
-                            !community &&
                             username && (
                                 <SidebarLinks
                                     username={username}
@@ -93,6 +112,15 @@ class PostsIndexLayout extends React.Component {
                                     ? 'CoinMarketPlaceCommunity'
                                     : 'CoinMarketPlaceIndex'
                             }`}
+                        />
+                    </aside>
+
+                    <aside className="c-sidebar c-sidebar--left">
+                        <Topics
+                            compact={false}
+                            username={username}
+                            subscriptions={subscriptions}
+                            topics={topics}
                         />
                         {adSwipeEnabled && (
                             <AdSwipe
@@ -115,43 +143,49 @@ class PostsIndexLayout extends React.Component {
                             />
                         )}
                     </aside>
-
-                    <aside className="c-sidebar c-sidebar--left">
-                        <PrimaryNavigation
-                            routeTag={routeTag.routeTag}
-                            category={category}
-                        />
-                    </aside>
                 </div>
             </div>
         );
     }
 }
 
-export default connect((state, props) => {
-    const username =
-        state.user.getIn(['current', 'username']) ||
-        state.offchain.get('account');
-    const adSwipeConf = state.app.getIn(['adSwipe']);
-    const tronAdsConf = state.app.getIn(['tronAds']);
-    const locale = state.app.getIn(['user_preferences', 'locale']);
-    const trackingId = state.app.getIn(['trackingId'], null);
-    const indexLeftSideAdList = state.ad.getIn(['indexLeftSideAdList'], List());
-    const routeTag = state.app.has('routeTag')
-        ? state.app.get('routeTag')
-        : null;
-    return {
-        blogmode: props.blogmode,
-        enableAds: props.enableAds,
-        community: state.global.getIn(['community', props.category], null),
-        topics: state.global.getIn(['topics'], List()),
-        isBrowser: process.env.BROWSER,
-        username,
-        adSwipeConf,
-        tronAdsConf,
-        locale,
-        trackingId,
-        indexLeftSideAdList,
-        routeTag,
-    };
-})(PostsIndexLayout);
+export default connect(
+    (state, props) => {
+        const username =
+            state.user.getIn(['current', 'username']) ||
+            state.offchain.get('account');
+        const adSwipeConf = state.app.getIn(['adSwipe']);
+        const tronAdsConf = state.app.getIn(['tronAds']);
+        const locale = state.app.getIn(['user_preferences', 'locale']);
+        const trackingId = state.app.getIn(['trackingId'], null);
+        const indexLeftSideAdList = state.ad.getIn(
+            ['indexLeftSideAdList'],
+            List()
+        );
+        const routeTag = state.app.has('routeTag')
+            ? state.app.get('routeTag')
+            : null;
+        return {
+            blogmode: props.blogmode,
+            enableAds: props.enableAds,
+            community: state.global.getIn(['community', props.category], null),
+            subscriptions: state.global.getIn(
+                ['subscriptions', username],
+                null
+            ),
+            topics: state.global.getIn(['topics'], List()),
+            isBrowser: process.env.BROWSER,
+            username,
+            adSwipeConf,
+            tronAdsConf,
+            locale,
+            trackingId,
+            indexLeftSideAdList,
+            routeTag,
+        };
+    },
+    dispatch => ({
+        getSubscriptions: account =>
+            dispatch(fetchDataSagaActions.getSubscriptions(account)),
+    })
+)(PostsIndexLayout);

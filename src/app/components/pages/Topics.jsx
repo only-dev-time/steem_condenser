@@ -33,6 +33,7 @@ class Topics extends Component {
                     return {
                         value: `/@${username}/feed`,
                         label: 'My Friends' || `tt('g.my_feed')`,
+                        label: 'My Friends' || `tt('g.my_feed')`,
                     };
                 if (tag === 'my')
                     return { value: `/trending/my`, label: 'My communities' };
@@ -113,8 +114,8 @@ class Topics extends Component {
         const moreLabel = <span>{tt('g.show_more_topics')}&hellip;</span>;
 
         const list = (
-            <span>
-                {(subscriptions || topics).size > 0}
+            <ul className="c-sidebar__list">
+                {(subscriptions || topics).size > 0 && <li>{commsHead}</li>}
                 {username &&
                     subscriptions &&
                     subscriptions

@@ -159,11 +159,11 @@ class Header extends React.Component {
             if (sort_order === 'home') {
                 const user = `${route.params[1]}`.replace('@', '');
                 if (user === username) {
-                    page_title = tt('g.my_friends');
+                    page_title = 'My Friends'; //tt('header_jsx.home');
                 } else if (user) {
-                    page_title = user + "'s " + tt('g.friends');
+                    page_title = user + "'s Friends";
                 } else {
-                    page_title = tt('g.my_friends');
+                    page_title = 'My Friends';
                 }
             } else {
                 topic = route.params.length > 1 ? route.params[1] || '' : '';
