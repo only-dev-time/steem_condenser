@@ -37,6 +37,7 @@ export const SET_DGP = 'global/SET_DGP';
 const SET_VESTS_PER_STEEM = 'global/SET_VESTS_PER_STEEM';
 const NOTICES = 'global/NOTICES';
 const FOLLOWERSLIST = 'global/FOLLOWERSLIST';
+const UPDATE_BOOKMARKS = 'global/UPDATE_BOOKMARKS';
 
 const postKey = (author, permlink) => {
     if ((author || '') === '' || (permlink || '') === '') return null;
@@ -329,6 +330,40 @@ export default function reducer(state = defaultState, action = {}) {
             return state.updateIn(key, notSet, updater);
         }
 
+        case UPDATE_BOOKMARKS: {
+            const { author, permlink, bookmark_action, account } = payload;
+            const key = author + '/' + permlink;
+            let new_state;
+
+            // updater function
+            const updateBookmarkedBy = (list, elem) => {
+                if (bookmark_action === 'add') {
+                    return list.push(elem);
+                } else if (bookmark_action === 'remove') {
+                    const idx = list.findIndex(i => i === elem);
+                    return idx === -1 ? list : list.delete(idx);
+                } else {
+                    return list;
+                }
+            };
+
+            // update discussion_idx entries
+            new_state = state.updateIn(
+                ['discussion_idx', '@' + account, 'bookmarks'],
+                List(),
+                list => updateBookmarkedBy(list, key)
+            );
+
+            // update content entries
+            new_state = new_state.updateIn(
+                ['content', key, 'bookmarked_by'],
+                List(),
+                list => updateBookmarkedBy(list, account)
+            );
+
+            return new_state;
+        }
+
         case FETCH_JSON: {
             return state;
         }
@@ -523,5 +558,10 @@ export const setDGP = payload => ({
 
 export const setVestsPerSteem = payload => ({
     type: SET_VESTS_PER_STEEM,
+    payload,
+});
+
+export const updateBookmarks = payload => ({
+    type: UPDATE_BOOKMARKS,
     payload,
 });
