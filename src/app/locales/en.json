@@ -229,6 +229,11 @@
         "reblog": "Resteem",
         "add_bookmark": "Add bookmark for this post",
         "remove_bookmark": "Remove bookmark for this post",
+        "bookmark_count": {
+            "zero": "No accounts bookmarked this post",
+            "one": "1 account bookmarked this post",
+            "other": "%(count)s accounts bookmarked this post"
+        },
         "write_your_story": "Write your story...",
         "remember_voting_and_posting_key": "Remember voting & posting key",
         "auto_login_question_mark": "Auto login?",

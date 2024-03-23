@@ -186,6 +186,11 @@
         "reblog": "Resteem",
         "add_bookmark": "Add bookmark for this post",
         "remove_bookmark": "Remove bookmark for this post",
+        "bookmark_count": {
+            "zero": "No accounts bookmarked this post",
+            "one": "1 account bookmarked this post",
+            "other": "%(count)s accounts bookmarked this post"
+        },
         "write_your_story": "投稿内容を書いてください",
         "remember_voting_and_posting_key": "投稿キーを記憶する",
         "auto_login_question_mark": "自動ログインしますか？",

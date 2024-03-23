@@ -186,6 +186,11 @@
         "reblog": "Reesteemear",
         "add_bookmark": "Add bookmark for this post",
         "remove_bookmark": "Remove bookmark for this post",
+        "bookmark_count": {
+            "zero": "No accounts bookmarked this post",
+            "one": "1 account bookmarked this post",
+            "other": "%(count)s accounts bookmarked this post"
+        },
         "write_your_story": "Escribe tu historia",
         "remember_voting_and_posting_key":
             "Recuerda la clave de voto y de publicación",

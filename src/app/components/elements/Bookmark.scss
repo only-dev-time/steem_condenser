@@ -39,3 +39,8 @@
   }
 }
 
+.Bookmark__count {
+  @include themify($themes) {
+    color: themed('textColorPrimary');
+  }
+}

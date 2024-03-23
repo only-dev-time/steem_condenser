@@ -183,6 +183,11 @@
         "reblog": "Поделиться",
         "add_bookmark": "Add bookmark for this post",
         "remove_bookmark": "Remove bookmark for this post",
+        "bookmark_count": {
+            "zero": "No accounts bookmarked this post",
+            "one": "1 account bookmarked this post",
+            "other": "%(count)s accounts bookmarked this post"
+        },
         "write_your_story": "Написать свою историю",
         "remember_voting_and_posting_key": "Запомнить голос и постинг ключ",
         "auto_login_question_mark": "Заходить автоматически?",

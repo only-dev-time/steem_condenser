@@ -186,6 +186,11 @@
         "reblog": "Resteem",
         "add_bookmark": "Add bookmark for this post",
         "remove_bookmark": "Remove bookmark for this post",
+        "bookmark_count": {
+            "zero": "No accounts bookmarked this post",
+            "one": "1 account bookmarked this post",
+            "other": "%(count)s accounts bookmarked this post"
+        },
         "write_your_story": "Scrivi la tua storia",
         "remember_voting_and_posting_key":
             "Ricorda la chiave di voto e di pubblicazione",

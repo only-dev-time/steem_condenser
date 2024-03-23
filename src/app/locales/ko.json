@@ -185,6 +185,11 @@
         "reblog": "리스팀",
         "add_bookmark": "Add bookmark for this post",
         "remove_bookmark": "Remove bookmark for this post",
+        "bookmark_count": {
+            "zero": "No accounts bookmarked this post",
+            "one": "1 account bookmarked this post",
+            "other": "%(count)s accounts bookmarked this post"
+        },
         "write_your_story": "내용을 입력하세요",
         "remember_voting_and_posting_key": "Remember voting & posting key",
         "auto_login_question_mark": "자동 로그인",
