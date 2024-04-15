@@ -331,15 +331,15 @@ export default function reducer(state = defaultState, action = {}) {
         }
 
         case UPDATE_BOOKMARKS: {
-            const { author, permlink, bookmark_action, account } = payload;
+            const { author, permlink, action, account } = payload;
             const key = author + '/' + permlink;
             let new_state;
 
             // updater function
             const updateBookmarkedBy = (list, elem) => {
-                if (bookmark_action === 'add') {
+                if (action === 'add') {
                     return list.push(elem);
-                } else if (bookmark_action === 'remove') {
+                } else if (action === 'remove') {
                     const idx = list.findIndex(i => i === elem);
                     return idx === -1 ? list : list.delete(idx);
                 } else {

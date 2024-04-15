@@ -18,6 +18,7 @@ import { actions as UserProfilesSagaActions } from 'app/redux/UserProfilesSaga';
 import UserProfileHeader from 'app/components/cards/UserProfileHeader';
 import SubscriptionsList from '../cards/SubscriptionsList';
 import * as appActions from 'app/redux/AppReducer';
+import * as globalActions from 'app/redux/GlobalReducer';
 
 const emptyPostsText = (section, account, isMyAccount) => {
     const name = '@' + account;
@@ -73,6 +74,7 @@ export default class UserProfile extends React.Component {
     constructor() {
         super();
         this.loadMore = this.loadMore.bind(this);
+        this.state = { bookmarksSort: null };
     }
 
     componentWillMount() {
@@ -85,6 +87,9 @@ export default class UserProfile extends React.Component {
         } = this.props;
         this.props.setRouteTag(accountname, section);
         if (!profile) fetchProfile(accountname, username);
+        if (section === 'bookmarks' && !this.state.bookmarksSort) {
+            this.setState({ bookmarksSort: 'bookmarks' });
+        }
     }
 
     componentWillUpdate(nextProps) {
@@ -124,7 +129,8 @@ export default class UserProfile extends React.Component {
             np.blogmode !== this.props.blogmode ||
             np.posts !== this.props.posts ||
             np.profile !== this.props.profile ||
-            np.notifications !== this.props.notifications
+            np.notifications !== this.props.notifications ||
+            ns.bookmarksSort !== this.state.bookmarksSort
         );
     }
 
@@ -134,6 +140,7 @@ export default class UserProfile extends React.Component {
         if (!last_post) return;
         //if (last_post == this.props.pending) return; // if last post is 'pending', its an invalid start token
         const { username, status, order, category } = this.props;
+        const { bookmarksSort } = this.state;
 
         if (isFetchingOrRecentlyUpdated(status, order, category)) return;
 
@@ -144,8 +151,16 @@ export default class UserProfile extends React.Component {
             order,
             category,
             observer: username,
+            sort: bookmarksSort,
         });
     }
+
+    handleBookmarksSort = sort => {
+        this.setState({ bookmarksSort: sort });
+        const { category, order, username, accountname } = this.props;
+        this.props.clearBookmarks(accountname);
+        this.props.requestData({ category, order, observer: username, sort });
+    };
 
     render() {
         const {
@@ -169,6 +184,7 @@ export default class UserProfile extends React.Component {
         // Loading status
         const _state = status ? status.getIn([category, order]) : null;
         const fetching = (_state && _state.fetching) || this.props.loading;
+        const { bookmarksSort } = this.state;
 
         if (profile) {
         } else if (fetching) {
@@ -317,6 +333,52 @@ export default class UserProfile extends React.Component {
             </div>
         );
 
+        const _tablink3 = (tab, label, title) => {
+            const item =
+                tab == bookmarksSort ? (
+                    <span title={title}>
+                        <strong>{label}</strong>
+                    </span>
+                ) : (
+                    <a
+                        href="#"
+                        title={title}
+                        onClick={event => {
+                            event.preventDefault();
+                            this.handleBookmarksSort(tab);
+                        }}
+                    >
+                        {label}
+                    </a>
+                );
+            return <div key={tab}>{item}</div>;
+        };
+        let tab_bookmarksSorts = null;
+        if (section === 'bookmarks') {
+            tab_bookmarksSorts = (
+                <div
+                    className="UserProfile__postmenu"
+                    style={{ display: 'flex' }}
+                >
+                    Sort by:
+                    {_tablink3(
+                        'bookmarks',
+                        'Bookmark',
+                        'Sorting by Date of Bookmark'
+                    )}{' '}
+                    //TODO counterpart strings
+                    {_tablink3('posts', 'Post', 'Sorting by Date of Post')}{' '}
+                    //TODO counterpart strings
+                    {_tablink3(
+                        'authors',
+                        'Author',
+                        'Sorting by Name of Author'
+                    )}{' '}
+                    //TODO counterpart strings
+                </div>
+            );
+        }
+
         return (
             <div className="UserProfile">
                 <UserProfileHeader
@@ -337,6 +399,7 @@ export default class UserProfile extends React.Component {
                     >
                         <article className="articles">
                             {tab_header}
+                            {posts.size > 0 && tab_bookmarksSorts}
                             {tab_content}
                         </article>
                     </div>
@@ -422,6 +485,12 @@ module.exports = {
                     appActions.setRouteTag({
                         routeTag: 'user_index',
                         params: { username: accountname, section },
+                    })
+                ),
+            clearBookmarks: accountname =>
+                dispatch(
+                    globalActions.remove({
+                        key: ['discussion_idx', '@' + accountname, 'bookmarks'],
                     })
                 ),
         })

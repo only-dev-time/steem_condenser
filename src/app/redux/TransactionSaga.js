@@ -404,7 +404,7 @@ function* accepted_custom_json({ operation }) {
         try {
             if (json[0] === 'follow') {
                 const { follower, following, what: [action] } = json[1];
-
+                // TODO check possible bookmark_json_op error
                 yield put(
                     globalActions.update({
                         key: ['follow', 'getFollowingAsync', follower],

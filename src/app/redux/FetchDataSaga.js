@@ -412,8 +412,8 @@ export function* markNotificationsAsReadSaga(action) {
 export function* fetchData(action) {
     // TODO: postFilter unused
     const { order, author, permlink, postFilter, observer } = action.payload;
-    let { category } = action.payload;
-    if (!category) category = '';
+    let { category, sort } = action.payload;
+    if (!sort) sort = 'bookmarks'; // sorting bookmarks
 
     yield put(globalActions.fetchingData({ order, category }));
     let call_name, args;
@@ -422,8 +422,8 @@ export function* fetchData(action) {
             call_name = 'get_bookmarked_posts';
             args = {
                 account: category.slice(1),
-                sort: 'bookmark', //TODO auf 'order' setzen, wenn in hivemind valid_sort geaendert
-                category: '',
+                sort: sort,
+                category: '', // currently unused
                 limit: constants.FETCH_DATA_BATCH_SIZE,
                 start_author: author,
                 start_permlink: permlink,
