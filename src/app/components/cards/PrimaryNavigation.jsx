@@ -46,8 +46,6 @@ class PrimaryNavigation extends React.PureComponent {
         if (prevProps.pathname !== pathname) {
             this.renderVisible();
         }
-        const { subscriptions, getSubscriptions, username } = this.props;
-        if (!subscriptions && username) getSubscriptions(username);
     }
 
     componentWillUnmount() {
@@ -72,6 +70,8 @@ class PrimaryNavigation extends React.PureComponent {
         const isSnapWidth = screenWidth >= snapWidth;
 
         const currentScrollPos = window.scrollY;
+        const windowHeight = window.innerHeight;
+        const navHeight = document.getElementById('appNavigation').offsetHeight;
 
         if (isSnapWidth) {
             // Always show the "More" Navigation items on wider screens
@@ -85,10 +85,6 @@ class PrimaryNavigation extends React.PureComponent {
             const emPadding = parseFloat(
                 window.getComputedStyle(navigationElement).fontSize
             );
-            const windowHeight = window.innerHeight;
-            const navHeight =
-                document.getElementById('appNavigation').offsetHeight +
-                2 * emPadding;
             const mastHeadHeight = parseFloat(
                 window.getComputedStyle(
                     document.getElementsByClassName('Header__nav')[0]
@@ -138,7 +134,7 @@ class PrimaryNavigation extends React.PureComponent {
                 navigationElement.classList.add('pin-bottom');
                 navigationElement.style.setProperty(
                     `--top`,
-                    `-${(navHeight - windowHeight) / emPadding - 1}em`
+                    `-${(navHeight - windowHeight) / emPadding + 1}em`
                 );
                 this.setState({ isScrollDown: true });
             } else if (
@@ -456,16 +452,16 @@ class PrimaryNavigation extends React.PureComponent {
                                     >
                                         <li>
                                             {tabLink(
-                                                '/@' + navaccountname + '/blog',
-                                                tt('g.blog')
-                                            )}
-                                        </li>
-                                        <li>
-                                            {tabLink(
                                                 '/@' +
                                                     navaccountname +
                                                     '/posts',
                                                 tt('g.posts')
+                                            )}
+                                        </li>
+                                        <li>
+                                            {tabLink(
+                                                '/@' + navaccountname + '/blog',
+                                                tt('g.blog')
                                             )}
                                         </li>
                                         <li>
@@ -591,16 +587,16 @@ class PrimaryNavigation extends React.PureComponent {
                             >
                                 <li>
                                     {tabLink(
-                                        '/@' + username + '/blog',
-                                        tt('g.blog'),
-                                        'profile'
+                                        '/@' + username + '/posts',
+                                        tt('g.posts'),
+                                        'library-books'
                                     )}
                                 </li>
                                 <li>
                                     {tabLink(
-                                        '/@' + username + '/posts',
-                                        tt('g.posts'),
-                                        'library-books'
+                                        '/@' + username + '/blog',
+                                        tt('g.blog'),
+                                        'profile'
                                     )}
                                 </li>
                                 <li>

@@ -157,7 +157,14 @@ class Header extends React.Component {
         if (route.page === 'PostsIndex') {
             sort_order = route.params[0];
             if (sort_order === 'home') {
-                page_title = 'My Friends'; //tt('header_jsx.home');
+                const user = `${route.params[1]}`.replace('@', '');
+                if (user === username) {
+                    page_title = tt('g.my_friends');
+                } else if (user) {
+                    page_title = user + "'s " + tt('g.friends');
+                } else {
+                    page_title = tt('g.my_friends');
+                }
             } else {
                 topic = route.params.length > 1 ? route.params[1] || '' : '';
                 gptTags = [topic];
