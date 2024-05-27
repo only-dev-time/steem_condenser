@@ -32,7 +32,7 @@
     "server_session_secret": "exiKdyF+IwRIXJDmtGIl4vWUz4i3eVSISpfZoeYc0s4=",
     "session_cookie_key": "stm-dev",
     "session_key": "steemses",
-    "site_domain": "steemit.com",
+    "site_domain": "steemit.moecki.online",
     "upload_image": "https://steemitimages.com",
     "steemd_connection_client": "https://api.moecki.online",
     "steemd_connection_server": "https://api.moecki.online",
