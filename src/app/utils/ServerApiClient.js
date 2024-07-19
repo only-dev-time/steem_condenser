@@ -116,21 +116,21 @@ export function recordRouteTag(trackingId, tag, params, isLogin = false) {
             break;
     }
     tags['is_login'] = isLogin;
-    api.call(
-        'overseer.collect',
-        [
-            'custom',
-            {
-                measurement: 'route',
-                fields,
-                tags,
-            },
-        ],
-        error => {
-            if (error)
-                console.warn('record route tag error', error, error.data);
-        }
-    );
+    // api.call(
+    //     'overseer.collect',
+    //     [
+    //         'custom',
+    //         {
+    //             measurement: 'route',
+    //             fields,
+    //             tags,
+    //         },
+    //     ],
+    //     error => {
+    //         if (error)
+    //             console.warn('record route tag error', error, error.data);
+    //     }
+    // );
 }
 
 export function userActionRecord(action, params) {
@@ -190,27 +190,27 @@ export function userActionRecord(action, params) {
             };
             break;
     }
-    api.call(
-        'overseer.collect',
-        [
-            'custom',
-            {
-                measurement: 'user_action',
-                fields,
-                tags,
-            },
-        ],
-        error => {
-            if (error)
-                console.warn('user action record error', error, error.data);
-        }
-    );
+    // api.call(
+    //     'overseer.collect',
+    //     [
+    //         'custom',
+    //         {
+    //             measurement: 'user_action',
+    //             fields,
+    //             tags,
+    //         },
+    //     ],
+    //     error => {
+    //         if (error)
+    //             console.warn('user action record error', error, error.data);
+    //     }
+    // );
 }
 
 export function recordAdsView({ trackingId, adTag }) {
-    api.call('overseer.collect', ['ad', { trackingId, adTag }], error => {
-        if (error) console.warn('overseer error', error);
-    });
+    // api.call('overseer.collect', ['ad', { trackingId, adTag }], error => {
+    //     if (error) console.warn('overseer error', error);
+    // });
 }
 
 export function recordActivityTracker({
@@ -233,9 +233,9 @@ export function recordActivityTracker({
             ua: navigator ? navigator.userAgent.toLowerCase() : null,
         },
     };
-    api.call('overseer.collect', ['custom', data], error => {
-        if (error) console.warn('overseer error:', data, error);
-    });
+    // api.call('overseer.collect', ['custom', data], error => {
+    //     if (error) console.warn('overseer error:', data, error);
+    // });
 }
 
 let last_page, last_views, last_page_promise;
