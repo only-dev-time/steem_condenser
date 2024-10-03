@@ -5,7 +5,7 @@
         "directives": {
             "childSrc": "'self' 3speak.online emb.d.tube player.twitch.tv www.youtube.com staticxx.facebook.com w.soundcloud.com player.vimeo.com *.tronads.io",
             "defaultSrc": "'self' img.3speakcontent.online emb.d.tube www.youtube.com staticxx.facebook.com player.vimeo.com *.streamrail.com",
-            "connectSrc": "'self' https://api.moecki.online https://api2.moecki.online https://steemitimages.com https://api.steemit.com https://api.steemitdev.com api.trongrid.io www.googletagmanager.com www.google-analytics.com pagead2.googlesyndication.com googleads.g.doubleclick.net securepubads.g.doubleclick.net",
+            "connectSrc": "'self' https://api.moecki.online https://api2.moecki.online https://sds.steemworld.org https://steemitimages.com https://api.steemit.com https://api.steemitdev.com api.trongrid.io www.googletagmanager.com www.google-analytics.com pagead2.googlesyndication.com googleads.g.doubleclick.net securepubads.g.doubleclick.net",
             "fontSrc": "'self' data: fonts.gstatic.com steemitdev.com steemit.com steemitwallet.com",
             "frameAncestors": "'none'",
             "frameSrc": "'self' googleads.g.doubleclick.net https:",
