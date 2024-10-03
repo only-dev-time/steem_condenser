@@ -9,16 +9,14 @@
     display: flex;
     z-index: 100000;
     height: 60px;
-    
+
     @include themify($themes) {
-        border-top: 1px solid themed('highlightBackgroundColor');
-        
         @include MQ(M) {
             border-radius: 6px;
             border: themed('border');
         }
     }
-                
+
     @include MQ(M) {
         bottom: unset;
         left: unset;
@@ -29,47 +27,47 @@
         position: relative;
         z-index: auto;
     }
-    
+
     .Icon > svg {
         @include themify($themes) {
           fill: themed('textColorPrimary');
         }
         display: block;
         cursor: pointer;
-               
+
         @include MQ(M) {
             display: inline-block;
         }
     }
-    
+
     ul.PrimaryNavTabs {
         display: flex;
-        justify-content: space-around; 
+        justify-content: space-around;
         margin-left: 0;
         margin-bottom: 0;
         width: 100%;
         @include themify($themes) {
             background-color: themed('navBackgroundColor');
-            border-top: 1px solid themed('highlightBackgroundColor');            
+            border-top: 1px solid themed('highlightBackgroundColor');
             @include MQ(M) {
                 border-top: none;
             }
         }
         border: none;
-                        
+
         @include MQ(M) {
             display: block;
             width: auto;
         }
     }
-    
+
     ul.PrimaryNavTabs li {
         flex: 1;
         list-style: none;
         margin: 0;
         text-align: center;
         width: 100%;
-                        
+
         @include MQ(M) {
             text-align: left;
         }
@@ -96,7 +94,7 @@
             }
         }
     }
-    
+
     ul.PrimaryNavTabs li a {
         width: 100%;
         display: block;
@@ -111,7 +109,7 @@
                 border-bottom: none;
             }
         }
-                        
+
         @include MQ(M) {
             height: unset;
             display: inline-block;
@@ -138,7 +136,7 @@
         @include themify($themes) {
           background: transparent;
         }
-                        
+
         @include MQ(M) {
             display: inline-block;
             padding-left: 0.6rem;
@@ -148,7 +146,7 @@
     ul.PrimaryNavTabs > li > ul.navigation-list {
         transform: translateY(150%);
         transition: transform 0.2s ease-in-out;
-                        
+
         @include MQ(M) {
             transform: none;
             transition: none;
@@ -163,7 +161,7 @@
 
     ul.PrimaryNavTabs > li > ul.visible {
         transform: translateY(0);
-                     
+
         @include MQ(M) {
             transform: none;
             transform: scaleY(1);
@@ -177,7 +175,7 @@
             display: none;
         }
     }
-    
+
     ul#FeedsNavigation,
     ul#ProfileNavigation {
         left: 0;
@@ -186,7 +184,7 @@
         height: auto;
 
         @include MQ(M) {
-            display: block;  
+            display: block;
         }
 
         li > a {
@@ -222,10 +220,10 @@
             }
         }
     }
-   
+
     ul#MoreNavigation {
-        flex-flow: row wrap;  
-        
+        flex-flow: row wrap;
+
         li {
             text-align: left;
         }
@@ -255,7 +253,7 @@
             @include MQ(M) {
                 border-top: none;
             }
-        }         
+        }
 
         @include MQ(M) {
             position: relative;
@@ -267,12 +265,12 @@
 
         li > a {
             width: 100%;
-            white-space: nowrap; 
+            white-space: nowrap;
 
             @include MQ(M) {
                 padding-left: 1.6rem;
             }
-            
+
             &.active {
                 @include themify($themes) {
                     color: themed('colorAccent');
@@ -294,18 +292,18 @@
 
             .LogoWrapper {
                 display: none;
-                
+
                 @include MQ(M) {
                     display: inline-block;
                 }
             }
-    
+
             span.Label {
                 padding: 0 0.4rem 0 0.6rem;
                 display: inline;
                 margin: 0;
             }
-            
+
             .Icon > svg {
                 vertical-align: middle;
                 margin-top: -12px;
@@ -313,12 +311,12 @@
         }
 
         .navigation-list {
-            transform: translateY(150%);
+            transform: translateY(100%);
             transition: transform 0.2s ease-in-out;
 
             @include MQ(M) {
                 transform: none;
-                display: none;  
+                display: none;
             }
         }
 
@@ -327,14 +325,14 @@
 
             @include MQ(M) {
                 transform: none;
-                display: block;  
+                display: block;
             }
         }
     }
-    
+
     ul#FeedsNavigation ul#ProfileNavigation {
         margin-bottom: 31px;
-        
+
         @include MQ(M) {
             margin-bottom: 0;
         }
@@ -349,8 +347,39 @@
     ul#FeedsNavigation > li.active > a {
         border-bottom: none !important;
     }
+
+    .NavShowHide {
+        cursor: pointer;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 0.2rem 0.5rem;
+        white-space: nowrap;
+        transition: bottom 0.1s ease-in-out;
+        @include themify($themes) {
+            background-color: themed('navBackgroundColor');
+        }
+
+        &:hover {
+            @include themify($themes) {
+                color: themed('textColorAccent');
+            }
+        }
+
+        p {
+            margin: 0;
+        }
+    }
+
+    .NavShowPrimary {
+        bottom: 60px;
+    }
+    .NavShowSecondary {
+        bottom: 120px;
+    }
 }
-        
+
 @include MQ(M) {
     :root {
         --top: '1em';
@@ -374,7 +403,7 @@
         top: 5em;
         transition: top 0.2s ease-in;
     }
-    
+
     div.pin-bottom {
         top: var(--top);
         bottom: 1em;
