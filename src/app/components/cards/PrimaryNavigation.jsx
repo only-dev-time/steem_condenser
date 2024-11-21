@@ -454,8 +454,8 @@ class PrimaryNavigation extends React.PureComponent {
             username ? (
                 <div
                     id="showHideNavigation"
-                    className={`NavShowHide 
-                    ${isNavVisible ? 'NavShowPrimary' : ''} 
+                    className={`NavShowHide
+                    ${isNavVisible ? 'NavShowPrimary' : ''}
                     ${
                         isNavVisible &&
                         (isFeedsNavigationVisible ||

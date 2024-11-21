@@ -34,8 +34,8 @@
     "session_key": "steemses",
     "site_domain": "steemit.moecki.online",
     "upload_image": "https://steemitimages.com",
-    "steemd_connection_client": "https://api.moecki.online",
-    "steemd_connection_server": "https://api.moecki.online",
+    "steemd_connection_client": "https://api2.moecki.online",
+    "steemd_connection_server": "https://api2.moecki.online",
     "rpc_list": [
         "https://api.steemit.com",
         "https://api.steemitdev.com",
