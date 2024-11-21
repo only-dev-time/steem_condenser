@@ -246,19 +246,19 @@ export function* getSubscriptions(action) {
  * @param {string} name of account
  */
 export function* getNotices(action) {
-    try {
-        const notices = yield call(
-            callBridge,
-            'get_notices',
-            {
-                limit: 1,
-            },
-            'turtle.'
-        );
-        yield put(globalActions.receiveNotices(notices));
-    } catch (error) {
-        console.log('Error Fetching get_notices: ', error);
-    }
+    // try {
+    //     const notices = yield call(
+    //         callBridge,
+    //         'get_notices',
+    //         {
+    //             limit: 1,
+    //         },
+    //         'turtle.'
+    //     );
+    //     yield put(globalActions.receiveNotices(notices));
+    // } catch (error) {
+    //     console.log('Error Fetching get_notices: ', error);
+    // }
 }
 
 /**
