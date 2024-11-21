@@ -189,7 +189,9 @@ class PostSummary extends React.Component {
                                 <span className="FeaturedTag">Pinned</span>
                             )}
                         </Link>
-                        <span className="articles__tag">&nbsp;•&nbsp;{post.getIn(['sc_trend'], "None")}</span>
+                        <span className="articles__tag">
+                            &nbsp;•&nbsp;{post.getIn(['sc_trend'], 'None')}
+                        </span>
                     </div>
                 </div>
             </div>

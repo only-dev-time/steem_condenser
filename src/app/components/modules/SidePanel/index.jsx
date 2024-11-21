@@ -124,11 +124,13 @@ const SidePanel = ({
             },
         ],
         exchanges: [
+            /*
             {
                 value: 'poloniex',
                 label: 'Poloniex',
                 link: 'https://poloniex.com/exchange#trx_steem',
             },
+            */
         ],
         wallet: [
             {
@@ -156,6 +158,7 @@ const SidePanel = ({
                 link: 'https://steem.chat/home',
             },
             */
+            /*
             {
                 label: tt('navigation.advertise'),
                 link: 'https://selfserve.steemit.com',
@@ -165,6 +168,7 @@ const SidePanel = ({
                 link:
                     'https://recruiting.paylocity.com/recruiting/jobs/List/3288/Steemit-Inc',
             },
+            */
             /*
             {
                 label: tt('navigation.app_center'),
@@ -231,17 +235,17 @@ const SidePanel = ({
                 <ul className="vertical menu">
                     {sidePanelLinks.wallet.map(makeLink)}
                 </ul>
-                <ul className="vertical menu">
+                {/* <ul className="vertical menu">
                     <li>
                         <a className="menu-section">
                             {tt('navigation.third_party_exchanges')}
                         </a>
                     </li>
                     {sidePanelLinks.exchanges.map(makeLink)}
-                </ul>
-                <ul className="vertical menu">
+                </ul> */}
+                {/* <ul className="vertical menu">
                     {sidePanelLinks.external.map(makeLink)}
-                </ul>
+                </ul> */}
                 <ul className="vertical menu">
                     {sidePanelLinks.organizational.map(makeLink)}
                 </ul>
