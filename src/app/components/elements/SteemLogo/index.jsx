@@ -18,9 +18,7 @@ const SteemLogo = () => {
                     />
                 </g>
             </svg>
-            <Link to="/@moecki">
-                by Witness Moecki
-            </Link>
+            <Link to="/@moecki">by Witness Moecki</Link>
         </span>
     );
 };

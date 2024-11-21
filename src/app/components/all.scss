@@ -10,6 +10,7 @@
 @import './cards/PostsList';
 @import './cards/NotificationsList';
 @import './cards/DraftSummary';
+@import './cards/PrimaryNavigation';
 // elements
 @import './elements/Ad';
 @import './elements/Icon';
@@ -47,9 +48,11 @@
 @import './elements/FlagButton';
 @import './elements/VideoAd';
 @import './elements/UserList';
+@import './elements/CommunityBanner';
 
 // modules
 @import './modules/Header/styles';
+@import './modules/CommunitySettings';
 @import './modules/LoginForm';
 @import './modules/PostDrafts';
 @import './modules/PostTemplates';

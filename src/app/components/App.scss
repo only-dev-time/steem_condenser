@@ -6,6 +6,12 @@
 .App__content {
   margin-top: 1rem;
   overflow: hidden;
+  margin-bottom: 60px;
+  padding-bottom: 30px;
+ 
+  @include MQ(M) {
+      margin-bottom: 0;
+  }
 }
 
 .welcomeWrapper {
@@ -213,15 +219,6 @@
           themed('moduleBackgroundColor') 20px
         );
     }
-}
-
-.reveal {
-  .tron-account-dl {
-    margin: 12px 0;
-    .pdf-download {
-        display: inline-block;
-    }
-  }
 }
 
 .LoginForm {
