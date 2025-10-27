@@ -35,7 +35,7 @@
     "site_domain": "steemit.moecki.online",
     "upload_image": "https://steemitimages.com",
     "steemd_connection_client": "https://api.moecki.online",
-    "steemd_connection_server": "https://api.moecki.online",
+    "steemd_connection_server": "http://172.17.0.3:8080",
     "rpc_list": [
         "https://api.steemit.com",
         "https://api.steemitdev.com",
@@ -56,7 +56,6 @@
         "https://api.pennsif.net",
         "https://steemapi.boylikegirl.club",
         "https://api.steemzzang.com",
-        "https://api.moecki.online",
         "https://api.campingclub.me",
         "https://api.steememory.com",
         "https://api.futureshock.world"
