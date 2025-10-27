@@ -35,7 +35,7 @@
     "site_domain": "steemit.steemnet.org",
     "upload_image": "https://steemitimages.com",
     "steemd_connection_client": "https://api.steemnet.org",
-    "steemd_connection_server": "https://api.steemnet.org",
+    "steemd_connection_server": "http://172.17.0.7:8080",
     "rpc_list": [
         "https://api.steemit.com",
         "https://api.steemitdev.com",
