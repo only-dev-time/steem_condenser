@@ -59,13 +59,13 @@ function logRequest(path, ctx, extra) {
 
 export default function useGeneralApi(app) {
     // requests are not proceed on steemit.moecki.online --> block all requests
-    app.use(async (ctx, next) => {
-        if (ctx.path.startsWith('/api/v1/')) {
-            ctx.status = 403;
-            ctx.body = 'API deactivated on steemit.moecki.online.';
+    app.use(function*(next) {
+        if (this.path.startsWith('/api/v1/')) {
+            this.status = 403;
+            this.body = 'API deactivated on steemit.moecki.online.';
             return;
         }
-        await next();
+        yield next;
     });
 
     const router = koa_router({ prefix: '/api/v1' });
