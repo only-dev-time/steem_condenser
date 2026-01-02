@@ -912,8 +912,19 @@ const mapDispatchToProps = dispatch => ({
     getSubscriptions: account =>
         dispatch(fetchDataSagaActions.getSubscriptions(account)),
     showLogin: e => {
-        if (e) e.preventDefault();
-        dispatch(userActions.showLogin({ type: 'basic' }));
+        try {
+            if (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            dispatch(userActions.showLogin({ type: 'basic' }));
+        } catch (error) {
+            console.error('Error in showLogin:', error);
+            // Even if there's an error, try to prevent default behavior
+            if (e && e.preventDefault) {
+                e.preventDefault();
+            }
+        }
     },
 });
 
